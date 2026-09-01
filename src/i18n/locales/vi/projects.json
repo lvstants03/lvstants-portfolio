@@ -1,16 +1,14 @@
 {
   "projects": {
-    "badge": "Showcase",
+    "badge": "Kho dự án",
     "title": "Dự án",
-    "subtitle": "Tiêu biểu",
-    "description": "Từ ý tưởng đến thực thi, đây là những sản phẩm tâm huyết thể hiện kỹ năng giải quyết vấn đề của mình.",
-    "preview": "Xem demo",
+    "subtitle": "Thực chiến",
+    "description": "Toàn bộ mã nguồn mở và hệ thống phần mềm được đồng bộ hóa trực tiếp thời gian thực từ GitHub.",
+    "all_filter": "Tất cả",
+    "no_repos": "Không tìm thấy kho mã nguồn nào phù hợp với bộ lọc.",
+    "preview": "Xem thử",
     "code": "Mã nguồn",
-    "bike_trade_desc": "Thiết kế hệ thống backend module-based, triển khai Auth và RESTful API. Tối ưu hiệu năng và CI/CD.",
-    "ev_app_desc": "Xây dựng microservices quản lý xe điện và thanh toán. Tích hợp Swagger và container hóa Docker.",
-    "roles": {
-      "backend": "Lập trình viên Backend",
-      "frontend": "Lập trình viên Frontend"
-    }
+    "live_demo": "Xem Demo",
+    "view_repo": "Mã nguồn"
   }
 }

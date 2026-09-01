@@ -1,61 +1,49 @@
 {
   "sectionTitle": "Giới thiệu về tôi",
-  "bio": "Tôi là một Full-stack Developer và UI/UX Designer đam mê tạo ra những sản phẩm số có ý nghĩa và tác động tích cực đến cuộc sống người dùng.",
+  "bio": "Full-Stack Software Engineer với kinh nghiệm thực tế toàn diện vòng đời phát triển phần mềm. Nền tảng vững chắc trong việc xây dựng hệ thống quy mô lớn, kiến trúc microservices và định hướng phát triển trở thành Software Architect.",
   "education": {
     "title": "Học vấn",
-    "degree": "Cử nhân Kỹ Sư Phần Mềm",
-    "university": "Đại học FPT Hồ Chí Minh",
-    "duration": "2021 - Hiện tại",
+    "degree": "Bachelor - Kỹ thuật phần mềm (Software Engineering)",
+    "university": "FPT University",
+    "duration": "11/2021 - 05/2026",
     "logo": "https://tse2.mm.bing.net/th/id/OIP.JKoUOGYRQEIVB2AI__DyHQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3"
   },
   "expertiseCategories": [
     {
       "id": "frontend",
       "icon": "Monitor",
-      "title": "Frontend Development",
-      "desc": "Phát triển giao diện web hiện đại và responsive",
-      "experience": "1.5 năm"
+      "title": "Frontend Engineering",
+      "desc": "Next.js 15, React 19, Tailwind CSS, TypeScript, WCAG responsive interfaces",
+      "experience": "2 năm"
     },
     {
       "id": "backend",
       "icon": "Server",
-      "title": "Backend Development",
-      "desc": "Xây dựng hệ thống API scalable và kiến trúc microservices",
+      "title": "Backend & System Architecture",
+      "desc": "Node.js, Express, NestJS, .NET 9.0, Microservices, SQL Server, PostgreSQL, Redis",
       "experience": "2 năm"
     },
     {
       "id": "uiux",
       "icon": "Palette",
-      "title": "UI/UX Design",
-      "desc": "Thiết kế trải nghiệm người dùng tối ưu",
-      "experience": "6 tháng"
+      "title": "UI/UX & Product Design",
+      "desc": "User Research, Wireframing, Human-Centered Design, Interactive Prototyping",
+      "experience": "1 năm"
     }
   ],
-"skillIcons": {
-  "Next.js": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
-  "ReactJS": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-  "Tailwind CSS": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
-  "JavaScript ES6+": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
-  "TypeScript": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
-  "ShadcnUI": "https://raw.githubusercontent.com/shadcn-ui/ui/main/apps/www/public/favicon.ico",
-
-  "Node.js (NestJS)": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
-  "NestJS": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg",
-  "C# / .NET 9.0": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg",
-  "ASP.NET Core Web API": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg",
-  ".NET 9.0": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg",
-  "PostgreSQL / MongoDB": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
-  "PostgreSQL": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
-  "MongoDB": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
-  "Prisma": "https://raw.githubusercontent.com/prisma/Collaborator-Resources/main/Logo%20Assets/Prisma-LogoSymbol.svg",
-
-  "Docker": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
-  "GitHub Actions": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
-  "Microservices": "https://raw.githubusercontent.com/visual-framework/vf-core/develop/assets/icons/services.svg",
-
-  "Figma": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
-  "Figma/Prototyping": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
-  "UX Research": "https://www.svgrepo.com/show/449902/research.svg",
-  "Design Thinking": "https://www.svgrepo.com/show/396349/design-thinking.svg"
-}
+  "skillIcons": {
+    "Next.js": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
+    "ReactJS": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+    "Tailwind CSS": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
+    "JavaScript ES6+": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+    "TypeScript": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+    "ShadcnUI": "https://raw.githubusercontent.com/shadcn-ui/ui/main/apps/www/public/favicon.ico",
+    "Node.js": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+    "NestJS": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg",
+    ".NET 9.0": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg",
+    "PostgreSQL": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
+    "MongoDB": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
+    "Docker": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
+    "Figma": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg"
+  }
 }

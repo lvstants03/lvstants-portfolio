@@ -1,36 +1,67 @@
 {
-  "badge": "Roadmap",
+  "badge": "Career Timeline",
   "title": "Work",
   "subtitle": "Experience",
-  "description": "The process of accumulating skills through real-world projects at enterprises.",
-  "visit_website": "Visit website",
-  "projects_label": "Featured Projects",
-  "takeaways_label": "Key Takeaways",
+  "description": "Hands-on experience delivering enterprise-scale terminal operating systems, seaport automation and fintech integrations.",
+  "select_position": "Select Position",
+  "company_website": "Company Website",
+  "deliverables": "Key Projects & Deliverables",
+  "takeaways_label": "Skills & Key Takeaways",
   "items": {
-    "ceh-soft-intern": {
-      "role": "Developer Intern",
-      "summary": "Contributed to developing UIs for complex financial systems and industrial automation solutions.",
-      "takeaways": [
-        "Proficient in Next.js within real-world enterprise projects.",
-        "Clear understanding of Fintech product cycles and UI security standards.",
-        "Experienced in a professional environment with high-pressure deadlines."
-      ],
-      "projects": {
-        "0": {
-          "name": "BIDV Banking Interface Integration",
+    "ceh-software-engineer": {
+      "role": "Software Engineer",
+      "company": "CEH Technology Platform Joint Stock Company",
+      "company_short": "CEH Platform",
+      "period": "05/2026 - Present",
+      "location": "Ho Chi Minh City, VN",
+      "summary": "Building core Terminal Operating System (TOS) modules for My Thuy International Port (MTIP), 2D spatial-temporal planning engines, and automated multi-tier tariff calculation pipelines.",
+      "projects": [
+        {
+          "name": "GTOS - My Thuy International Port Operating System (MTIP)",
           "responsibilities": [
-            "Supported teammates in developing a secure banking dashboard integrated with BIDV systems.",
-            "Transformed complex designs into high-performance, fully responsive source code."
-          ]
-        },
-        "1": {
-          "name": "SmartGate – Hai Phong Seaport System Support",
-          "responsibilities": [
-            "Maintained and enhanced modules for automated container operations at Hai Phong Port.",
-            "Optimized OCR data processing to improve accuracy for gate control systems."
+            "Architected core Terminal Operating System (TOS) modules: Berth Planning, Cargo Operations & Contract/Tariff Billing.",
+            "Engineered 2D spatial-temporal 'BA Map' (Berth Allocation Map) to visualize vessel visits along 1,200m+ berth lines with real-time ETA/ETB/ETD.",
+            "Implemented Booking Allocation engine to seamlessly synchronize commercial cargo pre-bookings into operational service orders.",
+            "Designed modular tariff microservices supporting multi-tier port billing rules (GT, HP, Metric Ton, TEU) and automatic discounts.",
+            "Refactored backend controllers into decoupled modular architectures, achieving high maintainability with 0% regression."
           ]
         }
-      }
+      ],
+      "takeaways": [
+        "Enterprise TOS Architecture",
+        "2D Spatial-Temporal Planning",
+        "Multi-tier Tariff Engines",
+        "Zero-Regression Refactoring"
+      ]
+    },
+    "ceh-fullstack-dev": {
+      "role": "Full Stack Developer",
+      "company": "CEH Technology Platform Joint Stock Company",
+      "company_short": "CEH Platform",
+      "period": "02/2025 - 05/2025",
+      "location": "Ho Chi Minh City, VN",
+      "summary": "Developed BIDV banking dashboard interfaces and industrial automation systems for seaport container management.",
+      "projects": [
+        {
+          "name": "BIDV Banking Interface Integration",
+          "responsibilities": [
+            "Built secure, high-performance banking dashboard interfaces integrated with BIDV systems using Next.js & TypeScript.",
+            "Transformed complex financial design specs into pixel-perfect, accessible (WCAG) and responsive UI components."
+          ]
+        },
+        {
+          "name": "SmartGate – Hai Phong Seaport Automation",
+          "responsibilities": [
+            "Engineered automated container gate-in/gate-out tracking systems powered by high-speed OCR camera integration.",
+            "Optimized backend data pipelines with PostgreSQL to maximize gate processing throughput and detection accuracy."
+          ]
+        }
+      ],
+      "takeaways": [
+        "High-Security Fintech UI",
+        "Industrial OCR Automation",
+        "Client Requirement Engineering"
+      ]
     }
   }
 }

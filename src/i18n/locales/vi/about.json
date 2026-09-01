@@ -1,42 +1,39 @@
 {
   "sectionTitle": "Giới thiệu về tôi",
-  "bio": "Tôi là một Full-stack Developer và UI/UX Designer đam mê tạo ra những sản phẩm số có ý nghĩa và tác động tích cực đến cuộc sống người dùng.",
+  "focus_title": "Nền tảng & Định hướng Kỹ thuật",
+  "philosophy_badge": "Triết lý & Phương pháp",
+  "philosophy_title": "Xây dựng phần mềm tin cậy với kiến trúc mở rộng",
+  "philosophy_desc": "Tôi tập trung vào việc phát triển các giải pháp phần mềm toàn diện từ backend đến frontend, chú trọng tính mở rộng (scalability), hiệu năng cao và trải nghiệm người dùng tinh tế.",
+  "clean_code": "Clean Code & Kiến trúc",
+  "clean_code_desc": "Dễ bảo trì, module hóa, kiểm thử tốt",
+  "perf_ui": "UI Tối ưu Hiệu năng",
+  "perf_ui_desc": "Tốc độ tải nhanh, không giật layout",
+  "formal_edu": "Nền tảng Giáo dục Chính quy",
+  "major": "Chuyên ngành",
+  "major_val": "Kỹ thuật Phần mềm (Software Engineering)",
+  "career_vision": "Định hướng Nghề nghiệp",
+  "career_vision_val": "Software Architect (Enterprise & Microservices)",
   "education": {
     "title": "Học vấn",
-    "degree": "Cử nhân Kỹ sư Phần mềm",
+    "degree": "Cử nhân Kỹ thuật Phần mềm (Đã tốt nghiệp)",
     "university": "Đại học FPT Hồ Chí Minh",
-    "duration": "2021 - Hiện tại"
+    "duration": "2021 - 2025 (Đã tốt nghiệp)"
   },
   "expertiseCategories": {
     "frontend": {
       "title": "Phát triển Frontend",
-      "desc": "Phát triển giao diện web hiện đại và responsive",
-      "experience": "2 năm kinh nghiệm",
-      "projects": [
-        "Phát triển giao diện ngân hàng tích hợp với BIDV sử dụng NextJS và ReactJS",
-        "Xây dựng nền tảng giao dịch nông sản AFF SupplyRoot tối ưu hiển thị",
-        "Thiết kế UI responsive theo tiêu chuẩn WCAG"
-      ]
+      "desc": "Next.js 15, React 19, Tailwind CSS, TypeScript, giao diện responsive chuẩn WCAG",
+      "experience": "2 năm kinh nghiệm"
     },
     "backend": {
-      "title": "Phát triển Backend",
-      "desc": "Xây dựng hệ thống API có khả năng mở rộng và kiến trúc microservices",
-      "experience": "1 năm kinh nghiệm",
-      "projects": [
-        "Thiết kế hệ thống quản lý xe điện kiến trúc Microservices trên .NET 9.0",
-        "Xây dựng Backend cho Bike Trade Platform sử dụng NestJS & Prisma",
-        "Hỗ trợ hệ thống tự động hóa SmartGate cho hoạt động ra/vào cảng container tại Cảng biển Hải Phòng sử dụng công nghệ camera OCR."
-      ]
+      "title": "Backend & Kiến trúc Hệ thống",
+      "desc": "Node.js, Express, NestJS, .NET 9.0, Microservices, SQL Server, PostgreSQL, Redis",
+      "experience": "2 năm kinh nghiệm"
     },
     "uiux": {
-      "title": "Thiết kế UI/UX",
-      "desc": "Thiết kế trải nghiệm người dùng tối ưu",
-      "experience": "1 năm kinh nghiệm",
-      "projects": [
-        "Nghiên cứu người dùng và tạo prototype hoàn chỉnh cho sản phẩm số",
-        "Áp dụng đạo đức công nghệ trong thiết kế trải nghiệm người dùng",
-        "Tối ưu hóa khả năng sử dụng qua kiểm thử lặp (Iterative testing)"
-      ]
+      "title": "Thiết kế UI/UX & Sản phẩm",
+      "desc": "Nghiên cứu người dùng, Wireframing, Human-Centered Design, Interactive Prototyping",
+      "experience": "1 năm kinh nghiệm"
     }
   }
 }

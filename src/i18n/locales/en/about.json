@@ -1,42 +1,39 @@
 {
   "sectionTitle": "About Me",
-  "bio": "I am a Full-stack Developer and UI/UX Designer passionate about creating meaningful digital products that have a positive impact on users' lives.",
+  "focus_title": "Background & Engineering Focus",
+  "philosophy_badge": "Philosophy & Approach",
+  "philosophy_title": "Building reliable software with scalable architectures",
+  "philosophy_desc": "I focus on delivering end-to-end software solutions from backend to frontend, emphasizing scalability, high performance, and refined user experience.",
+  "clean_code": "Clean Code & Architecture",
+  "clean_code_desc": "Maintainable, Modular, Testable",
+  "perf_ui": "Performance-First UI",
+  "perf_ui_desc": "Fast LCP, Zero Layout Shifts",
+  "formal_edu": "Formal Education",
+  "major": "Major",
+  "major_val": "Software Engineering",
+  "career_vision": "Career Vision",
+  "career_vision_val": "Software Architect (Enterprise & Microservices)",
   "education": {
     "title": "Education",
-    "degree": "Bachelor of Software Engineering",
-    "university": "FPT University Ho Chi Minh City",
-    "duration": "2021 - Present"
+    "degree": "Bachelor of Software Engineering (Graduated)",
+    "university": "FPT University HCM",
+    "duration": "2021 - 2025 (Graduated)"
   },
   "expertiseCategories": {
     "frontend": {
-      "title": "Frontend Development",
-      "desc": "Developing modern, responsive web interfaces",
-      "experience": "2 years of experience",
-      "projects": [
-        "Developed integrated banking interfaces with BIDV using NextJS and ReactJS ",
-        "Built AFF SupplyRoot agricultural trading platform with optimized display",
-        "Designed responsive UI following WCAG accessibility standards"
-      ]
+      "title": "Frontend Engineering",
+      "desc": "Next.js 15, React 19, Tailwind CSS, TypeScript, WCAG-compliant responsive interfaces",
+      "experience": "2 years experience"
     },
     "backend": {
-      "title": "Backend Development",
-      "desc": "Building scalable API systems and microservices architecture",
-      "experience": "1 year of experience",
-      "projects": [
-        "Designed EV management system with Microservices on .NET 9.0",
-        "Built Backend for Bike Trade Platform using NestJS & Prisma",
-        "Supported the SmartGate automation system for container gate-in/gate-out operations at Hai Phong Seaport using OCR camera technology."
-      ]
+      "title": "Backend & System Architecture",
+      "desc": "Node.js, Express, NestJS, .NET 9.0, Microservices, SQL Server, PostgreSQL, Redis",
+      "experience": "2 years experience"
     },
     "uiux": {
-      "title": "UI/UX Design",
-      "desc": "Designing optimized user experiences",
-      "experience": "1 year of experience",
-      "projects": [
-        "User research and complete prototyping for digital products",
-        "Applying tech ethics in user experience design",
-        "Optimizing usability through iterative testing"
-      ]
+      "title": "UI/UX & Product Design",
+      "desc": "User Research, Wireframing, Human-Centered Design, Interactive Prototyping",
+      "experience": "1 year experience"
     }
   }
 }

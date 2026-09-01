@@ -1,172 +1,210 @@
 "use client";
 
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious
-} from "@/components/ui/carousel";
-import { Card, CardDescription, CardTitle } from "@/components/ui/card";
+import { useState, useEffect, useMemo } from "react";
+import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Github, Calendar, Layers } from "lucide-react";
-import Image from "next/image";
-import projectsData from "@/data/projects.json";
+import { 
+  ExternalLink, 
+  Github, 
+  Star, 
+  GitFork, 
+  Code2, 
+  Clock
+} from "lucide-react";
 import { motion } from "framer-motion";
-import { getTechnologyIcon, getTechnologyColor } from "../utils/technology";
 import { Badge } from "@/components/ui/badge";
 import { useTranslation } from "react-i18next";
-import { useState, useEffect } from "react";
-
-interface Project {
-  title: string;
-  roleKey: string;
-  duration: string;
-  github: string;
-  link?: string;
-  image: string;
-  technologies: string[];
-  descriptionKey: string;
-  category: string;
-}
+import { useGitHubProjects } from "@/hooks/useGitHubProjects";
+import { GitHubRepo } from "@/app/api/github/route";
 
 export default function ProjectSections() {
   const { t } = useTranslation();
   const [mounted, setMounted] = useState(false);
-  
-  const projects = (projectsData as Project[]) || [];
+  const [activeFilter, setActiveFilter] = useState<string>("ALL");
+
+  const { repos, loading: githubLoading } = useGitHubProjects();
   const p = "projects.projects";
 
-  // Xử lý Hydration: Chỉ hiển thị nội dung sau khi Client đã mount
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  // Compute available languages for filtering
+  const githubLanguages = useMemo(() => {
+    const langs = Array.from(new Set(repos.map(r => r.language).filter(Boolean)));
+    return ["ALL", ...langs];
+  }, [repos]);
+
+  // Filtered repositories based on selected language
+  const filteredGithub = useMemo(() => {
+    if (activeFilter === "ALL") return repos;
+    return repos.filter(item => item.language?.toLowerCase() === activeFilter.toLowerCase());
+  }, [repos, activeFilter]);
+
   if (!mounted) {
-    return <section id="projects" className="py-24 bg-[#050505] min-h-[600px]" />;
+    return <section id="projects" className="py-24 bg-[#09090b] min-h-[600px]" />;
   }
 
   return (
-    <section id="projects" className="py-24 relative overflow-visible bg-[#050505]">
-      {/* Background Decor */}
-      <div className="absolute top-0 right-1/4 w-[400px] h-[400px] bg-yellow-500/5 blur-[120px] rounded-full pointer-events-none" />
-      
-      <div className="container mx-auto max-w-6xl px-4">
-        {/* Header Section */}
-        <motion.div 
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          <Badge className="mb-4 px-4 py-1.5 border-yellow-500/20 text-yellow-500 bg-yellow-500/10 rounded-full text-[10px] uppercase tracking-[0.3em] font-bold">
-            {t(`${p}.badge`)}
-          </Badge>
-          <h2 className="text-4xl md:text-5xl font-black mb-6 uppercase tracking-tighter text-white">
-            {t(`${p}.title`)} <span className="text-yellow-500">{t(`${p}.subtitle`)}</span>
+    <section id="projects" className="py-28 relative overflow-hidden bg-[#09090b] text-white">
+      <div className="container mx-auto max-w-5xl px-4 sm:px-6 relative z-10">
+        
+        {/* Section Header */}
+        <div className="mb-12">
+          <span className="text-xs text-yellow-400 font-mono font-semibold uppercase tracking-widest block mb-2">
+            03 / {t(`${p}.badge`, { defaultValue: "FEATURED PROJECTS" })}
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+            {t(`${p}.title`, { defaultValue: "Featured" })} {t(`${p}.subtitle`, { defaultValue: "Projects" })}
           </h2>
-          <p className="text-zinc-500 max-w-xl mx-auto text-sm md:text-base leading-relaxed px-4">
-            {t(`${p}.description`)}
+          <p className="text-zinc-400 text-sm mt-2 max-w-xl">
+            {t(`${p}.description`, { defaultValue: "Toàn bộ mã nguồn mở và hệ thống phần mềm được đồng bộ hóa trực tiếp thời gian thực từ GitHub." })}
           </p>
-        </motion.div>
 
-        {/* Carousel Section */}
-        <div className="relative px-2 md:px-14">
-          <Carousel 
-            opts={{ align: "start", loop: true }} 
-            className="w-full relative group/carousel"
-          >
-            <CarouselContent className="-ml-4">
-              {projects.map((project, index) => (
-                <CarouselItem key={index} className="pl-4 basis-full md:basis-1/2 lg:basis-1/3 py-4">
-                  <Card className="h-full flex flex-col bg-zinc-900/40 border-white/5 hover:border-yellow-500/30 transition-all duration-500 group backdrop-blur-md overflow-hidden relative">
-                    
-                    {/* Project Image & Overlay */}
-                    <div className="relative aspect-video overflow-hidden">
-                      <Image
-                        src={project.image || "/placeholder.svg"}
-                        alt={project.title}
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        className="object-cover transform group-hover:scale-110 transition-transform duration-700 opacity-90 group-hover:opacity-100"
-                        unoptimized={project.image?.startsWith('http')} 
-                      />
-                      <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center gap-3 backdrop-blur-sm">
-                        {project.link && (
-                          <Button 
-                            size="sm" 
-                            onClick={() => window.open(project.link, "_blank")}
-                            className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold text-[10px] uppercase rounded-full"
+          {/* Language Filter Pills */}
+          <div className="flex flex-wrap items-center gap-2 mt-8">
+            {githubLanguages.map((filter) => {
+              const count = filter !== "ALL"
+                ? repos.filter(r => r.language?.toLowerCase() === filter.toLowerCase()).length
+                : repos.length;
+
+              const label = filter === "ALL" 
+                ? t(`${p}.all_filter`, { defaultValue: "All" })
+                : filter;
+
+              return (
+                <button
+                  key={filter}
+                  onClick={() => setActiveFilter(filter)}
+                  className={`px-4 py-1.5 rounded-xl text-xs font-mono font-semibold uppercase tracking-wider transition-all duration-200 flex items-center gap-2 cursor-pointer ${
+                    activeFilter.toUpperCase() === filter.toUpperCase()
+                      ? "bg-yellow-400 text-zinc-950 shadow-md font-bold"
+                      : "bg-zinc-900/80 text-zinc-400 hover:text-white hover:bg-zinc-800 border border-zinc-800"
+                  }`}
+                >
+                  <span>{label}</span>
+                  <span className={`text-[10px] px-1.5 py-0.2 rounded-md font-mono ${
+                    activeFilter.toUpperCase() === filter.toUpperCase()
+                      ? "bg-black/20 text-black font-bold"
+                      : "bg-black/50 text-zinc-500"
+                  }`}>
+                    {count}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Dynamic Projects Grid */}
+        <div>
+          {githubLoading ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <div key={i} className="h-72 rounded-2xl bg-zinc-900/40 border border-zinc-800 animate-pulse p-6 space-y-4">
+                  <div className="h-5 bg-white/10 rounded-md w-3/4" />
+                  <div className="h-4 bg-white/5 rounded-md w-full" />
+                  <div className="h-4 bg-white/5 rounded-md w-2/3" />
+                  <div className="h-8 bg-white/5 rounded-xl w-full mt-auto" />
+                </div>
+              ))}
+            </div>
+          ) : filteredGithub.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredGithub.map((repo: GitHubRepo) => (
+                <motion.div
+                  key={repo.id}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4 }}
+                  className="h-full"
+                >
+                  <Card className="h-full flex flex-col justify-between bg-zinc-900/40 border-zinc-800 hover:border-zinc-700 transition-all duration-300 group overflow-hidden rounded-2xl shadow-sm p-6">
+                    <div>
+                      {/* Header: Title & Stars / Forks */}
+                      <div className="flex items-start justify-between gap-3 mb-3">
+                        <div className="flex items-center gap-2">
+                          <Code2 className="w-5 h-5 text-yellow-400 shrink-0" />
+                          <a 
+                            href={repo.url} 
+                            target="_blank" 
+                            rel="noreferrer"
+                            className="text-base font-bold text-white group-hover:text-yellow-400 transition-colors line-clamp-1 tracking-tight"
                           >
-                            <ExternalLink className="w-3.5 h-3.5 mr-1" /> {t(`${p}.preview`)}
+                            {repo.name}
+                          </a>
+                        </div>
+                        
+                        <div className="flex items-center gap-1.5 shrink-0">
+                          <span className="flex items-center gap-1 text-[11px] font-mono text-yellow-400 bg-yellow-500/10 px-2 py-0.5 rounded-md border border-yellow-500/20">
+                            <Star className="w-3 h-3 fill-yellow-400" />
+                            {repo.stars}
+                          </span>
+                          <span className="flex items-center gap-1 text-[11px] font-mono text-zinc-400 bg-white/5 px-2 py-0.5 rounded-md border border-white/5">
+                            <GitFork className="w-3 h-3" />
+                            {repo.forks}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Description */}
+                      <p className="text-zinc-400 text-xs line-clamp-3 mb-5 leading-relaxed min-h-[48px] font-normal">
+                        {repo.description}
+                      </p>
+
+                      {/* Language & Tags */}
+                      <div className="flex flex-wrap items-center gap-1.5 mb-6">
+                        {repo.language && (
+                          <span className="px-2.5 py-0.5 bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 text-[10px] font-bold rounded-md uppercase font-mono">
+                            {repo.language}
+                          </span>
+                        )}
+                        {repo.topics?.slice(0, 3).map((topic, tIdx) => (
+                          <span key={tIdx} className="px-2 py-0.5 bg-zinc-950 text-zinc-400 border border-zinc-800 text-[10px] font-mono rounded-md">
+                            {topic}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Footer Actions */}
+                    <div className="pt-4 border-t border-zinc-800/80 flex items-center justify-between">
+                      <div className="flex items-center gap-1.5 text-zinc-500 text-[11px] font-mono">
+                        <Clock className="w-3 h-3 text-yellow-400/80" />
+                        <span>{new Date(repo.updatedAt).toLocaleDateString("vi-VN")}</span>
+                      </div>
+
+                      <div className="flex items-center gap-2">
+                        {repo.homepage && (
+                          <Button
+                            size="sm"
+                            onClick={() => window.open(repo.homepage, "_blank")}
+                            className="h-8 px-3 bg-yellow-400 text-zinc-950 hover:bg-yellow-300 font-bold text-[11px] uppercase rounded-lg shadow-sm cursor-pointer"
+                          >
+                            <ExternalLink className="w-3 h-3 mr-1" /> {t(`${p}.live_demo`, { defaultValue: "Demo" })}
                           </Button>
                         )}
-                        <Button 
-                          size="sm" 
+                        <Button
+                          size="sm"
                           variant="outline"
-                          onClick={() => window.open(project.github, "_blank")}
-                          className="border-white/20 text-white hover:bg-white hover:text-black font-bold text-[10px] uppercase rounded-full"
+                          onClick={() => window.open(repo.url, "_blank")}
+                          className="h-8 px-3 border-zinc-800 bg-zinc-950 text-zinc-300 hover:bg-zinc-800 hover:text-white font-medium text-[11px] uppercase rounded-lg cursor-pointer"
                         >
-                          <Github className="w-3.5 h-3.5 mr-1" /> {t(`${p}.code`)}
+                          <Github className="w-3.5 h-3.5 mr-1" /> {t(`${p}.view_repo`, { defaultValue: "Repo" })}
                         </Button>
                       </div>
                     </div>
-
-                    {/* Content */}
-                    <div className="p-6 flex flex-col flex-1">
-                      <CardTitle className="text-xl font-bold text-zinc-100 mb-2 group-hover:text-yellow-500 transition-colors line-clamp-1">
-                        {project.title}
-                      </CardTitle>
-                      
-                      <CardDescription className="text-zinc-500 text-sm line-clamp-2 mb-6 leading-relaxed min-h-[40px]">
-                        {t(`${p}.${project.descriptionKey}`)}
-                      </CardDescription>
-
-                      {/* Tech Stack */}
-                      <div className="flex flex-wrap gap-2 mb-6">
-                        {project.technologies?.slice(0, 3).map((tech, i) => {
-                          const Icon = getTechnologyIcon(tech);
-                          return (
-                            <div key={i} className="flex items-center gap-1.5 px-2 py-1 bg-white/5 border border-white/5 rounded-md text-[10px] text-zinc-400 font-medium">
-                              <Icon className={`w-3 h-3 ${getTechnologyColor(tech)}`} />
-                              {tech}
-                            </div>
-                          );
-                        })}
-                        {project.technologies?.length > 3 && (
-                          <span className="text-[10px] text-zinc-600 self-center">+{project.technologies.length - 3}</span>
-                        )}
-                      </div>
-
-                      {/* Footer Info */}
-                      <div className="mt-auto pt-4 border-t border-white/5 flex items-center justify-between text-zinc-500">
-                        <div className="flex items-center gap-2">
-                          <Layers className="w-3.5 h-3.5 text-yellow-500/70" />
-                          <span className="text-[10px] font-bold uppercase tracking-wider">
-                            {t(`${p}.roles.${project.roleKey}`)}
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Calendar className="w-3.5 h-3.5 text-zinc-600" />
-                          <span className="text-[10px] font-medium">
-                            {project.duration?.split(' - ')[1] || '2026'}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
                   </Card>
-                </CarouselItem>
+                </motion.div>
               ))}
-            </CarouselContent>
-            
-            {/* Navigation - Hidden on Mobile */}
-            <div className="hidden md:block">
-               <CarouselPrevious className="absolute -left-12 top-1/2 -translate-y-1/2 bg-zinc-900/80 border-white/10 text-white hover:bg-yellow-500 hover:text-black transition-all shadow-xl" />
-               <CarouselNext className="absolute -right-12 top-1/2 -translate-y-1/2 bg-zinc-900/80 border-white/10 text-white hover:bg-yellow-500 hover:text-black transition-all shadow-xl" />
             </div>
-          </Carousel>
+          ) : (
+            <div className="text-center py-16 text-zinc-500 text-sm">
+              {t(`${p}.no_repos`, { defaultValue: "Khong tim thay repositories phu hop voi bo loc." })}
+            </div>
+          )}
         </div>
+
       </div>
     </section>
   );

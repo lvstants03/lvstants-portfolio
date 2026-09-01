@@ -1,67 +1,62 @@
-"use client"
+"use client";
 
-import HomeView from "./HomeSection"
-import AboutSection from "./AboutSection"
-import SkillsSection from "./SkillsSection"
-import Header from "./Header"
-import CertificatesSection from "./CertificationSection"
-import ProjectSections from "./ProjectsSections"
-import ExperienceSection from "./ExperienceSection"
-import { useScrollSpy } from "@/hooks/useScrollSpy"
-import { VerticalNav } from "@/components/VerticalNav"
+import HomeView from "./HomeSection";
+import AboutSection from "./AboutSection";
+import SkillsSection from "./SkillsSection";
+import Header from "./Header";
+import CertificatesSection from "./CertificationSection";
+import ProjectSections from "./ProjectsSections";
+import ExperienceSection from "./ExperienceSection";
+import SpotlightEffect from "@/components/SpotlightEffect";
+import ScrollProgressBar from "@/components/ScrollProgressBar";
+import { useScrollSpy } from "@/hooks/useScrollSpy";
+import { VerticalNav } from "@/components/VerticalNav";
 
-// Đảm bảo ID trùng khớp với ID trong navigationItems của Header
-const sectionIds = ["home", "introduce", "skills", "projects", "certificates", "experience"]
+const sectionIds = ["home", "introduce", "skills", "projects", "certificates", "experience"];
 
 export default function Portfolio() {
-  const activeSection = useScrollSpy(sectionIds)
+  const activeSection = useScrollSpy(sectionIds);
 
   return (
-    <div className="Body-content bg-[#030303] min-h-screen relative selection:bg-yellow-500/30 selection:text-yellow-500">
+    <div className="Body-content bg-[#09090b] text-zinc-100 min-h-screen relative selection:bg-yellow-500/20 selection:text-yellow-400">
       
-      {/* 1. Header: Nhận activeSection để hiển thị thanh highlight vàng */}
+      {/* Top Subtle Scroll Indicator */}
+      <ScrollProgressBar />
+
+      {/* Ambient Grid & Subtle Spotlight */}
+      <SpotlightEffect />
+
+      {/* Header */}
       <Header activeSection={activeSection ?? "home"} />
 
-      {/* 2. Điều hướng dọc */}
+      {/* Vertical Navigation Indicator */}
       <VerticalNav activeSection={activeSection ?? undefined} sectionIds={sectionIds} />
 
-      <main>
-        {/* Home Section */}
+      <main className="relative z-10">
         <section id="home">
           <HomeView />
         </section>
 
-        {/* About Section */}
-        <section id="introduce" className="border-t border-white/5">
+        <section id="introduce" className="border-t border-zinc-900">
           <AboutSection />
         </section>
 
-        {/* Skills Section */}
-        <section id="skills" className="border-t border-white/5">
+        <section id="skills" className="border-t border-zinc-900">
           <SkillsSection />
         </section>
 
-        {/* Projects Section */}
-        <section id="projects" className="border-t border-white/5">
+        <section id="projects" className="border-t border-zinc-900">
           <ProjectSections />
         </section>
 
-        {/* Certificates Section */}
-        <section id="certificates" className="border-t border-white/5">
+        <section id="certificates" className="border-t border-zinc-900">
           <CertificatesSection />
         </section>
 
-        {/* Experience Section */}
-        <section id="experience" className="border-t border-white/5 pb-32">
+        <section id="experience" className="border-t border-zinc-900 pb-28">
           <ExperienceSection />
         </section>
       </main>
-
-      {/* Hiệu ứng nền (Background Glow) */}
-      <div className="fixed inset-0 pointer-events-none -z-50 overflow-hidden">
-        <div className="absolute top-[-10%] left-[-10%] w-[70%] md:w-[40%] h-[40%] bg-yellow-500/5 rounded-full blur-[100px] md:blur-[120px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[70%] md:w-[40%] h-[40%] bg-yellow-500/5 rounded-full blur-[100px] md:blur-[120px]" />
-      </div>
     </div>
-  )
+  );
 }

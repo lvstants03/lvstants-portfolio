@@ -1,11 +1,16 @@
 {
-  "status": "Available for new projects",
-  "heading_top": "Coding",
-  "heading_bottom": "Experiences",
-  "bio": "Experienced in creating beautiful, user-friendly digital experiences and optimizing Backend systems.",
+  "status": "Available for full-time & contract roles",
+  "headline_p1": "Full-stack Engineer &",
+  "headline_p2": "System Architect",
+  "bio_desc": "Specializing in building robust backend systems, scalable microservices architectures, and modern high-performance web interfaces.",
   "description": "I am <1>{{name}}</1>. {{bio}}",
-  "btn_cv": "Download CV",
-  "btn_projects": "View Projects",
+  "btn_cv": "Download Official CV",
+  "btn_projects": "Explore Projects",
+  "location": "Ho Chi Minh City, VN",
+  "university": "FPT University",
+  "years_exp": "2+ Years Exp",
+  "motto": "MERN, NestJS & .NET",
+  "core_tech_title": "Core Technologies",
   "stats_exp": "Years Exp",
   "stats_projects": "Projects Done"
 }

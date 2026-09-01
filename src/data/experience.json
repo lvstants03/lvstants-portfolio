@@ -1,36 +1,65 @@
 {
   "workExperience": [
     {
-      "id": "ceh-soft-intern",
-      "company": "CEH Soft (Công ty CP Giải pháp Công nghệ CEH)",
+      "id": "ceh-software-engineer",
+      "company": "CEH Technology Platform Joint Stock Company",
       "website": "https://cehsoft.com/",
       "previewImage": "https://s.wordpress.com/mshots/v1/https://cehsoft.com?w=800&h=600",
-      "role": "Developer Intern",
+      "role": "Software Engineer",
+      "period": "05/2026 - Hiện tại",
+      "location": "Hồ Chí Minh",
+      "summary": "Phát triển các module cốt lõi của Hệ thống điều hành cảng biển quốc tế GTOS (My Thuy International Port Operating System - MTIP), biểu đồ lập kế hoạch cầu bến 2D và engine phân bổ hàng hóa.",
+      "projects": [
+        {
+          "name": "GTOS - My Thuy International Port Operating System (MTIP)",
+          "techStack": ["Node.js", "Express.js", "Knex.js", "MSSQL", "Tailwind CSS", "RESTful APIs"],
+          "responsibilities": [
+            "Đóng góp xây dựng các module cốt lõi của Terminal Operating System (TOS) gồm Berth Planning, Cargo Operations và Contract/Tariff Billing.",
+            "Phát triển biểu đồ không gian - thời gian 2D BA Map (Berth Allocation Map) trực quan hóa hành trình tàu cập cầu cảng 1,200m+ với lịch trình ETA/ETB/ETD thời gian thực.",
+            "Triển khai Booking Allocation engine map dữ liệu hàng hóa thương mại vào các chuyến tàu đã lên lịch.",
+            "Thiết kế dịch vụ biểu cước và hợp đồng module hóa hỗ trợ tính cước cảng đa tầng (GT, HP, Metric Ton, TEU) và quy tắc chiết khấu tự động.",
+            "Tái cấu trúc (refactor) controller sang kiến trúc modular độc lập, đảm bảo bảo trì cao và 0% regression."
+          ]
+        }
+      ],
+      "keyTakeaways": [
+        "Kiến trúc hệ thống quy mô lớn (Enterprise Terminal Operating System)",
+        "Thiết kế thuật toán 2D Spatial-Temporal Planning (BA Map)",
+        "Tính toán cước phí và biểu giá đa tầng thời gian thực",
+        "Refactoring backend đảm bảo 0% lỗi hồi quy"
+      ]
+    },
+    {
+      "id": "ceh-fullstack-dev",
+      "company": "CEH Technology Platform Joint Stock Company",
+      "website": "https://cehsoft.com/",
+      "previewImage": "https://s.wordpress.com/mshots/v1/https://cehsoft.com?w=800&h=600",
+      "role": "Full Stack Developer",
       "period": "02/2025 - 05/2025",
       "location": "Hồ Chí Minh",
-      "summary": "Đóng góp vào việc phát triển giao diện người dùng cho các hệ thống tài chính phức tạp và giải pháp tự động hóa công nghiệp.",
+      "summary": "Tham gia phát triển giao diện ngân hàng BIDV và hệ thống tự động hóa quản lý container tại Cảng biển Hải Phòng.",
       "projects": [
         {
           "name": "BIDV Banking Interface Integration",
           "techStack": ["Next.js", "Tailwind CSS", "Shadcn UI", "TypeScript"],
           "responsibilities": [
-            "Hỗ trợ teammate phát triển giao diện Dashboard ngân hàng tích hợp hệ thống BIDV, đảm bảo quy trình giao dịch an toàn và mượt mà.",
-            "Chuyển đổi các bản thiết kế phức tạp thành mã nguồn có hiệu suất cao, đạt chuẩn responsive cho mọi thiết bị."
+            "Phát triển giao diện Dashboard ngân hàng tích hợp hệ thống BIDV, đảm bảo quy trình giao dịch an toàn và mượt mà.",
+            "Chuyển đổi các bản thiết kế phức tạp thành mã nguồn hiệu năng cao, chuẩn responsive đa thiết bị."
           ]
         },
         {
-          "name": "SmartGate – Hải Phòng Seaport System Support",
+          "name": "SmartGate – Hải Phòng Seaport Automation",
           "techStack": ["Node.js", "PostgreSQL", "OCR Technology"],
           "responsibilities": [
-            "Hỗ trợ bảo trì và cải thiện các module trong hệ thống tự động hóa vận hành container tại Cảng Hải Phòng.",
-            "Tham gia tối ưu hóa quy trình xử lý dữ liệu từ camera OCR để tăng cường độ chính xác trong việc kiểm soát gate-in/gate-out."
+            "Xây dựng và bảo trì hệ thống tự động hóa kiểm soát container ra/vào cổng cảng sử dụng công nghệ nhận diện camera OCR.",
+            "Tối ưu hóa quy trình xử lý dữ liệu để tăng cường độ chính xác trong việc kiểm soát gate-in/gate-out."
           ]
         }
       ],
       "keyTakeaways": [
-        "Sử dụng thành thạo Next.js trong dự án thực tế quy mô doanh nghiệp.",
-        "Hiểu rõ quy trình phát triển sản phẩm Fintech và tiêu chuẩn bảo mật giao diện.",
-        "Kinh nghiệm làm việc trong môi trường chuyên nghiệp với áp lực tiến độ cao."
+        "Phát triển giao diện Fintech chuẩn bảo mật cao",
+        "Tự động hóa công nghiệp và xử lý dữ liệu OCR camera",
+        "Làm việc trực tiếp với khách hàng và giải quyết bài toán nghiệp vụ phức tạp"
       ]
     }
   ]

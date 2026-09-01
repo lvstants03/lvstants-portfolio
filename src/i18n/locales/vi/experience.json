@@ -1,36 +1,67 @@
 {
-    "badge": "Lộ trình",
-    "title": "Kinh nghiệm",
-    "subtitle": "Làm việc",
-    "description": "Quá trình tích lũy kỹ năng thông qua các dự án thực tế tại doanh nghiệp.",
-    "visit_website": "Ghé thăm website",
-    "projects_label": "Dự án tiêu biểu",
-    "takeaways_label": "Giá trị đạt được",
-    "items": {
-      "ceh-soft-intern": {
-        "role": "Thực tập sinh lập trình",
-        "summary": "Đóng góp vào việc phát triển giao diện người dùng cho các hệ thống tài chính phức tạp và giải pháp tự động hóa công nghiệp.",
-        "takeaways": [
-          "Sử dụng thành thạo Next.js trong dự án thực tế quy mô doanh nghiệp.",
-          "Hiểu rõ quy trình phát triển sản phẩm Fintech và tiêu chuẩn bảo mật giao diện.",
-          "Kinh nghiệm làm việc trong môi trường chuyên nghiệp với áp lực tiến độ cao."
-        ],
-        "projects": {
-          "0": {
-            "name": "BIDV Banking Interface Integration",
-            "responsibilities": [
-              "Hỗ trợ teammate phát triển giao diện Dashboard ngân hàng tích hợp hệ thống BIDV, đảm bảo quy trình giao dịch an toàn và mượt mà.",
-              "Chuyển đổi các bản thiết kế phức tạp thành mã nguồn có hiệu suất cao, đạt chuẩn responsive cho mọi thiết bị."
-            ]
-          },
-          "1": {
-            "name": "SmartGate – Hải Phòng Seaport System Support",
-            "responsibilities": [
-              "Hỗ trợ bảo trì và cải thiện các module trong hệ thống tự động hóa vận hành container tại Cảng Hải Phòng.",
-              "Tham gia tối ưu hóa quy trình xử lý dữ liệu từ camera OCR để tăng cường độ chính xác trong việc kiểm soát gate-in/gate-out."
-            ]
-          }
+  "badge": "Lộ trình sự nghiệp",
+  "title": "Kinh nghiệm",
+  "subtitle": "Làm việc",
+  "description": "Kinh nghiệm thực chiến qua các dự án doanh nghiệp quy mô lớn, hệ thống điều hành cảng biển quốc tế và giải pháp tự động hóa.",
+  "select_position": "Chọn vị trí làm việc",
+  "company_website": "Trang web công ty",
+  "deliverables": "Dự án & Kết quả then chốt",
+  "takeaways_label": "Kỹ năng & Giá trị đạt được",
+  "items": {
+    "ceh-software-engineer": {
+      "role": "Software Engineer",
+      "company": "Công ty Cổ phần Nền tảng Công nghệ CEH",
+      "company_short": "CEH Platform",
+      "period": "05/2026 - Hiện tại",
+      "location": "TP. Hồ Chí Minh, VN",
+      "summary": "Phát triển module cốt lõi Hệ thống điều hành cảng biển quốc tế GTOS (My Thuy International Port - MTIP), biểu đồ kế hoạch 2D và engine tính cước đa tầng.",
+      "projects": [
+        {
+          "name": "GTOS - Hệ thống Điều hành Cảng Quốc tế Mỹ Thủy (MTIP)",
+          "responsibilities": [
+            "Xây dựng module cốt lõi Terminal Operating System (TOS): Berth Planning, Cargo Operations & Contract/Tariff Billing.",
+            "Phát triển biểu đồ không gian - thời gian 2D 'BA Map' trực quan hóa 1,200m+ tuyến cầu cảng với lịch ETA/ETB/ETD thời gian thực.",
+            "Triển khai Booking Allocation engine map dữ liệu hàng hóa thương mại vào các chuyến tàu đã lên lịch.",
+            "Thiết kế dịch vụ biểu cước đa tầng (GT, HP, Metric Ton, TEU) và quy tắc tự động chiết khấu cước cảng.",
+            "Refactor backend controllers sang kiến trúc modular độc lập, đảm bảo bảo trì cao và 0% lỗi hồi quy."
+          ]
         }
-      }
+      ],
+      "takeaways": [
+        "Kiến trúc TOS Doanh nghiệp",
+        "Lập kế hoạch 2D Không gian - Thời gian",
+        "Engine Tính cước Đa tầng",
+        "Refactoring 0% Lỗi hồi quy"
+      ]
+    },
+    "ceh-fullstack-dev": {
+      "role": "Full Stack Developer",
+      "company": "Công ty Cổ phần Nền tảng Công nghệ CEH",
+      "company_short": "CEH Platform",
+      "period": "02/2025 - 05/2025",
+      "location": "TP. Hồ Chí Minh, VN",
+      "summary": "Tham gia phát triển giao diện ngân hàng BIDV và hệ thống tự động hóa kiểm soát container tại Cảng biển Hải Phòng.",
+      "projects": [
+        {
+          "name": "Tích hợp Giao diện Ngân hàng BIDV",
+          "responsibilities": [
+            "Phát triển giao diện Dashboard ngân hàng tích hợp hệ thống BIDV an toàn, mượt mà bằng Next.js & TypeScript.",
+            "Chuyển đổi các bản thiết kế phức tạp thành mã nguồn hiệu năng cao, chuẩn responsive và trợ năng (WCAG)."
+          ]
+        },
+        {
+          "name": "SmartGate – Tự động hóa Cảng biển Hải Phòng",
+          "responsibilities": [
+            "Xây dựng hệ thống tự động hóa kiểm soát container ra/vào cổng cảng sử dụng công nghệ nhận diện camera OCR.",
+            "Tối ưu hóa pipeline xử lý dữ liệu với PostgreSQL để tối đa hóa độ chính xác và tốc độ luân chuyển xe container."
+          ]
+        }
+      ],
+      "takeaways": [
+        "Giao diện Fintech Bảo mật cao",
+        "Tự động hóa Công nghiệp OCR",
+        "Kỹ thuật Phân tích Nghiệp vụ"
+      ]
     }
+  }
 }

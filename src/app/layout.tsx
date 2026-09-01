@@ -2,6 +2,9 @@ import { Inter, Cormorant_Garamond } from "next/font/google";
 import Footer from "../view/Footer";
 import { Metadata } from "next";
 import Header from "@/view/Header";
+import AmbientSoundPlayer from "@/components/AmbientSoundPlayer";
+import VoiceAIAssistant from "@/components/VoiceAIAssistant";
+import HandGestureScroll from "@/components/HandGestureScroll";
 import '../styles/globals.css';
 import I18nProvider from "@/config/i18/I18nProvider";
 
@@ -80,13 +83,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="vi" className={`${inter.variable} ${cormorant.variable} scroll-smooth`}>
-      <body className="font-body bg-black antialiased">
+    <html lang="vi" className={`${inter.variable} ${cormorant.variable} scroll-smooth`} suppressHydrationWarning>
+      <body className="font-body bg-black antialiased" suppressHydrationWarning>
         <I18nProvider>
-          <Header />
           <main className="min-h-screen">
             {children}
           </main>
+          <AmbientSoundPlayer />
+          <HandGestureScroll />
+          <VoiceAIAssistant />
           <Footer />
         </I18nProvider>
       </body>

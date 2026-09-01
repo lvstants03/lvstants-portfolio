@@ -1,218 +1,168 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react" // 1. Thêm hooks để xử lý Hydration
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { useState, useEffect } from "react";
 import { 
   GraduationCap, Monitor, Server, Palette, 
-  Smartphone, Code2, Briefcase, LucideIcon 
-} from "lucide-react"
-import { motion } from "framer-motion"
-import { Badge } from "@/components/ui/badge"
-import { useTranslation } from "react-i18next"
-import Image from "next/image"
-import aboutData from "@/data/about.json"
+  CheckCircle2, Layers, Cpu,
+  LucideIcon 
+} from "lucide-react";
+import { useTranslation } from "react-i18next";
+import Image from "next/image";
+import aboutData from "@/data/about.json";
 
 const IconMap: Record<string, LucideIcon> = {
   Monitor: Monitor,
   Server: Server,
-  Palette: Palette,
-  Smartphone: Smartphone
-}
+  Palette: Palette
+};
 
 export default function AboutSection() {
   const { t } = useTranslation();
-  
-  // 2. State kiểm soát mount để tránh lỗi Hydration (Server-Client mismatch)
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Nếu chưa mounted, render bản skeleton tĩnh đơn giản để khớp với Server
   if (!mounted) {
-    return <section id="introduce" className="py-24 bg-[#050505]" />;
+    return <section id="introduce" className="py-24 bg-[#09090b]" />;
   }
 
   return (
-    <section id="introduce" className="py-24 px-4 bg-[#050505] text-white relative overflow-hidden">
-      {/* Background Decor */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -left-20 w-80 h-80 bg-yellow-500/5 blur-[120px] rounded-full" />
-        <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-yellow-500/5 blur-[120px] rounded-full" />
-      </div>
-
-      <div className="container mx-auto max-w-6xl relative z-10">
-        {/* Header Section */}
-        <motion.div
-          className="text-center mb-20"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-        >
-          <Badge className="mb-4 px-4 py-1.5 border-yellow-500/20 text-yellow-500 bg-yellow-500/10 rounded-full text-[10px] uppercase tracking-[0.3em] font-bold">
-            {t('about.education.title')}
-          </Badge>
-          
-          <h2 className="text-4xl md:text-5xl font-black mb-6 uppercase tracking-tighter">
-            {t('about.sectionTitle').split(' ').map((word: string, i: number) =>
-              word.toLowerCase() === 'tôi' || word.toLowerCase() === 'me' ?
-              <span key={i} className="text-yellow-500"> {word}</span> : ` ${word}`
-            )}
+    <section id="introduce" className="py-24 px-4 bg-[#09090b] text-zinc-100 relative">
+      <div className="container mx-auto max-w-5xl px-4 sm:px-6 relative z-10">
+        
+        {/* Section Header */}
+        <div className="mb-14">
+          <span className="text-xs text-yellow-400 font-mono font-semibold uppercase tracking-widest block mb-2">
+            01 / {t('about.education.title', { defaultValue: 'EDUCATION & BACKGROUND' })}
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+            {t('about.focus_title', { defaultValue: 'Background & Engineering Focus' })}
           </h2>
-          
-          <div className="h-1.5 w-20 bg-yellow-500 mx-auto mb-8 rounded-full" />
-          <p className="text-zinc-400 max-w-3xl mx-auto text-sm md:text-base leading-relaxed font-medium">
-            {t('about.bio')}
-          </p>
-        </motion.div>
+        </div>
 
-        <div className="grid lg:grid-cols-12 gap-8 items-start">
-          {/* Left Side: Expertise */}
-          <motion.div
-            className="lg:col-span-7 space-y-6"
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h3 className="text-xl font-black uppercase tracking-widest mb-8 flex items-center gap-3 text-zinc-100">
-              <span className="w-8 h-[2px] bg-yellow-500"></span>
-              {t('about.expertiseCategories.frontend.title').includes('Frontend') ? 'My Expertise' : 'Chuyên môn của tôi'}
-            </h3>
-            
-            <div className="grid gap-4">
+        {/* Clean Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
+          
+          {/* Bento 1: Engineering Focus & Principles (Col 7) */}
+          <div className="md:col-span-7 p-7 rounded-2xl bg-zinc-900/40 border border-zinc-800 flex flex-col justify-between shadow-sm">
+            <div>
+              <div className="flex items-center gap-2 text-xs font-mono text-zinc-400 uppercase tracking-wider mb-4">
+                <Cpu className="w-4 h-4 text-yellow-400" />
+                <span>{t('about.philosophy_badge', { defaultValue: 'Philosophy & Approach' })}</span>
+              </div>
+
+              <h3 className="text-xl font-bold text-white mb-3 tracking-tight">
+                {t('about.philosophy_title', { defaultValue: 'Building reliable software with scalable architectures' })}
+              </h3>
+
+              <p className="text-zinc-400 text-sm leading-relaxed mb-6 font-normal">
+                {t('about.philosophy_desc', { defaultValue: 'Tôi tập trung vào việc phát triển các giải pháp phần mềm toàn diện từ backend đến frontend, chú trọng tính mở rộng (scalability), hiệu năng cao và trải nghiệm người dùng tinh tế.' })}
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 border-t border-zinc-800/80 text-xs">
+                <div className="flex items-start gap-2 text-zinc-300">
+                  <CheckCircle2 className="w-4 h-4 text-yellow-400 shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-semibold block text-white">{t('about.clean_code', { defaultValue: 'Clean Code & Architecture' })}</span>
+                    <span className="text-zinc-500 text-[11px]">{t('about.clean_code_desc', { defaultValue: 'Maintainable, Modular, Testable' })}</span>
+                  </div>
+                </div>
+                <div className="flex items-start gap-2 text-zinc-300">
+                  <CheckCircle2 className="w-4 h-4 text-yellow-400 shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-semibold block text-white">{t('about.perf_ui', { defaultValue: 'Performance-First UI' })}</span>
+                    <span className="text-zinc-500 text-[11px]">{t('about.perf_ui_desc', { defaultValue: 'Fast LCP, Zero Layout Shifts' })}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-8 pt-4 border-t border-zinc-800/60 flex items-center justify-between text-xs text-zinc-500 font-mono">
+              <span>MERN Stack, NestJS, .NET 9.0</span>
+              <span>RESTful & Microservices</span>
+            </div>
+          </div>
+
+          {/* Bento 2: Education (Col 5) */}
+          <div className="md:col-span-5 p-7 rounded-2xl bg-zinc-900/40 border border-zinc-800 flex flex-col justify-between shadow-sm">
+            <div>
+              <div className="flex items-center gap-2 text-xs font-mono text-zinc-400 uppercase tracking-wider mb-4">
+                <GraduationCap className="w-4 h-4 text-yellow-400" />
+                <span>{t('about.formal_edu', { defaultValue: 'Formal Education' })}</span>
+              </div>
+
+              <div className="p-4 rounded-xl bg-zinc-950/80 border border-zinc-800/80 flex items-center gap-4 mb-4">
+                <div className="relative w-12 h-12 shrink-0 rounded-lg overflow-hidden bg-white p-1 border border-zinc-700">
+                  <Image
+                    src={aboutData.education.logo}
+                    alt="University Logo"
+                    fill
+                    sizes="48px"
+                    className="object-contain"
+                  />
+                </div>
+                <div>
+                  <h4 className="font-bold text-sm text-white leading-snug">{t('about.education.degree', { defaultValue: 'Bachelor - Software Engineering (Graduated)' })}</h4>
+                  <p className="text-xs text-zinc-400 mt-0.5">{t('about.education.university', { defaultValue: 'FPT University' })}</p>
+                  <p className="text-yellow-400 text-[11px] font-mono mt-1">{t('about.education.duration', { defaultValue: '2021 - 2025 (Graduated)' })}</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-2 text-xs">
+              <div className="p-3 rounded-lg bg-zinc-950/50 border border-zinc-800 flex items-center justify-between">
+                <span className="text-zinc-400">{t('about.major', { defaultValue: 'Major' })}</span>
+                <span className="text-zinc-200 font-medium">{t('about.major_val', { defaultValue: 'Software Engineering' })}</span>
+              </div>
+              <div className="p-3 rounded-lg bg-zinc-950/50 border border-zinc-800 flex items-center justify-between">
+                <span className="text-zinc-400">{t('about.career_vision', { defaultValue: 'Career Vision' })}</span>
+                <span className="text-yellow-400 font-mono font-semibold">{t('about.career_vision_val', { defaultValue: 'Software Architect (Enterprise & Microservices)' })}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Bento 3: 3 Pillars of Expertise (Col 12) */}
+          <div className="md:col-span-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {aboutData.expertiseCategories.map((item, index) => {
-                const Icon = IconMap[item.icon] || Monitor
+                const Icon = IconMap[item.icon] || Monitor;
                 return (
-                  <motion.div
+                  <div
                     key={item.id}
-                    className="group relative p-6 rounded-2xl bg-zinc-900/40 border border-white/5 hover:border-yellow-500/30 transition-all duration-500 backdrop-blur-sm"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    viewport={{ once: true }}
+                    className="p-6 rounded-2xl bg-zinc-900/40 border border-zinc-800 hover:border-zinc-700 transition-colors flex flex-col justify-between"
                   >
-                    <div className="flex gap-6 items-start">
-                      <div className="shrink-0 w-14 h-14 bg-zinc-950 rounded-2xl flex items-center justify-center border border-white/10 group-hover:bg-yellow-500 group-hover:border-yellow-500 transition-all duration-500 shadow-xl">
-                        <Icon className="w-7 h-7 text-yellow-500 group-hover:text-black transition-colors" />
-                      </div>
-                      <div>
-                        <div className="flex items-center gap-3 mb-2">
-                          <h4 className="font-bold text-lg group-hover:text-yellow-500 transition-colors">
-                            {t(`about.expertiseCategories.${item.id as 'frontend' | 'backend' | 'uiux'}.title`)}
-                          </h4>
-                          <span className="text-[10px] px-2 py-0.5 bg-white/5 text-zinc-500 rounded uppercase font-bold tracking-tighter">
-                            {t(`about.expertiseCategories.${item.id as 'frontend' | 'backend' | 'uiux'}.experience`)}
-                          </span>
+                    <div>
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="p-2.5 bg-zinc-950 rounded-xl border border-zinc-800 text-yellow-400">
+                          <Icon className="w-5 h-5" />
                         </div>
-                        <p className="text-zinc-500 text-sm leading-relaxed group-hover:text-zinc-300 transition-colors">
-                          {t(`about.expertiseCategories.${item.id as 'frontend' | 'backend' | 'uiux'}.desc`)}
-                        </p>
+                        <span className="text-[11px] px-2.5 py-0.5 bg-zinc-800 text-zinc-300 rounded-md font-mono">
+                          {t(`about.expertiseCategories.${item.id as 'frontend' | 'backend' | 'uiux'}.experience`)}
+                        </span>
                       </div>
+
+                      <h4 className="text-base font-bold text-white mb-2">
+                        {t(`about.expertiseCategories.${item.id as 'frontend' | 'backend' | 'uiux'}.title`)}
+                      </h4>
+                      <p className="text-zinc-400 text-xs leading-relaxed">
+                        {t(`about.expertiseCategories.${item.id as 'frontend' | 'backend' | 'uiux'}.desc`)}
+                      </p>
                     </div>
-                  </motion.div>
-                )
+
+                    <div className="mt-6 pt-3 border-t border-zinc-800/80 flex items-center justify-between text-[11px] text-zinc-500 font-mono">
+                      <span>Area 0{index + 1}</span>
+                      <Layers className="w-3.5 h-3.5 text-zinc-600" />
+                    </div>
+                  </div>
+                );
               })}
             </div>
-          </motion.div>
+          </div>
 
-          {/* Right Side: Education & Skills */}
-          <motion.div
-            className="lg:col-span-5 space-y-6"
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h3 className="text-xl font-black uppercase tracking-widest mb-8 flex items-center gap-3 text-zinc-100">
-              <span className="w-8 h-[2px] bg-yellow-500"></span>
-              {t('about.education.title') === 'Học vấn' ? 'Hành trình' : 'Journey'}
-            </h3>
-
-            {/* Học vấn Card */}
-            <Card className="bg-zinc-900/60 border-white/5 text-white overflow-hidden backdrop-blur-md">
-              <CardHeader className="pb-4">
-                <CardTitle className="flex items-center gap-3 text-yellow-500 text-sm uppercase tracking-[0.2em] font-black">
-                  <GraduationCap className="w-5 h-5" />
-                  {t('about.education.title')}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex items-center gap-5 p-4 rounded-xl bg-black/40 border border-white/5 transition-all hover:border-yellow-500/20">
-                  <div className="relative shrink-0 w-16 h-16">
-                    <Image
-                      src={aboutData.education.logo}
-                      alt="University Logo"
-                      fill
-                      // 3. Thêm sizes để sửa lỗi warning performance
-                      sizes="64px"
-                      className="rounded-xl object-contain p-2 bg-white"
-                    />
-                    <div className="absolute -bottom-2 -right-2 bg-yellow-500 p-1.5 rounded-lg shadow-lg z-20">
-                      <Briefcase className="w-3 h-3 text-black" />
-                    </div>
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-base leading-tight mb-1">{t('about.education.degree')}</h4>
-                    <p className="text-zinc-400 text-xs font-semibold uppercase">{t('about.education.university')}</p>
-                    <p className="text-yellow-500/70 text-[10px] font-black mt-2 tracking-widest italic">{t('about.education.duration')}</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Skills Card */}
-            <Card className="bg-zinc-900/60 border-white/5 text-white backdrop-blur-md">
-              <CardHeader className="pb-4">
-                <CardTitle className="flex items-center gap-3 text-yellow-500 text-sm uppercase tracking-[0.2em] font-black">
-                  <Code2 className="w-5 h-5" />
-                  {t('about.education.title') === 'Học vấn' ? 'Kỹ năng cốt lõi' : 'Core Skills'}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-2 gap-3">
-                  <SkillItem icon={aboutData.skillIcons.ReactJS} label="ReactJS" time={t('about.expertiseCategories.frontend.experience')} />
-                  <SkillItem icon={aboutData.skillIcons["Next.js"]} label="Next.js" time={t('about.expertiseCategories.frontend.experience')} />
-                  <SkillItem icon={aboutData.skillIcons.Figma} label="Figma" time={t('about.expertiseCategories.uiux.experience')} />
-                  <SkillItem icon={<Smartphone className="w-5 h-5 text-yellow-500" />} label="Mobile" time="6 months" />
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
         </div>
       </div>
     </section>
-  )
-}
-
-interface SkillItemProps {
-  icon: string | React.ReactNode;
-  label: string;
-  time: string;
-}
-
-function SkillItem({ icon, label, time }: SkillItemProps) {
-  return (
-    <div className="flex items-center gap-3 p-3 rounded-xl bg-black/40 border border-white/5 hover:border-yellow-500/20 hover:bg-zinc-900/80 transition-all duration-300 group">
-      <div className="shrink-0 w-8 h-8 flex items-center justify-center relative">
-        {typeof icon === 'string' ? (
-          <Image 
-            src={icon} 
-            alt={label} 
-            width={24} 
-            height={24} 
-            className="object-contain grayscale group-hover:grayscale-0 transition-all" 
-          />
-        ) : (
-          <div className="text-yellow-500 transition-transform group-hover:scale-110">{icon}</div>
-        )}
-      </div>
-      <div className="overflow-hidden">
-        <div className="text-[11px] font-black uppercase tracking-tight truncate group-hover:text-yellow-500 transition-colors">{label}</div>
-        <div className="text-[9px] text-zinc-600 font-bold uppercase tracking-widest">{time}</div>
-      </div>
-    </div>
-  )
+  );
 }

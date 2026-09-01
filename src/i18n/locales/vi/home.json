@@ -1,11 +1,16 @@
 {
-  "status": "Sẵn sàng cho các dự án mới",
-  "heading_top": "Lập trình",
-  "heading_bottom": "Trải nghiệm",
-  "bio": "Kinh nghiệm tạo ra những trải nghiệm số đẹp mắt, thân thiện với người dùng và tối ưu hóa hệ thống Backend.",
+  "status": "Sẵn sàng nhận dự án & công việc toàn thời gian",
+  "headline_p1": "Kỹ sư Full-stack &",
+  "headline_p2": "Kiến trúc sư Hệ thống",
+  "bio_desc": "Chuyên xây dựng hệ thống backend mạnh mẽ, kiến trúc microservices scalable và giao diện web hiện đại, tối ưu hiệu năng.",
   "description": "Tôi là <1>{{name}}</1>. {{bio}}",
-  "btn_cv": "Tải CV cá nhân",
-  "btn_projects": "Xem dự án",
+  "btn_cv": "Tải CV chính thức",
+  "btn_projects": "Xem các dự án",
+  "location": "Quận 9, TP. Hồ Chí Minh",
+  "university": "Đại học FPT",
+  "years_exp": "2+ Năm kinh nghiệm",
+  "motto": "MERN, NestJS & .NET",
+  "core_tech_title": "Công nghệ cốt lõi",
   "stats_exp": "Năm kinh nghiệm",
   "stats_projects": "Dự án hoàn thành"
 }

@@ -1,205 +1,236 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { motion } from "framer-motion"
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { 
   Building2, 
-  Calendar, 
   MapPin, 
   CheckCircle2, 
   Code2, 
   ArrowUpRight,
-  Briefcase,
-  UserCircle 
-} from "lucide-react"
-import Image from "next/image"
-import { useTranslation } from "react-i18next"
-import experienceData from "@/data/experience.json"
+  ChevronRight
+} from "lucide-react";
+import { useTranslation } from "react-i18next";
+import experienceData from "@/data/experience.json";
 
 export default function ExperienceSection() {
-  const { t } = useTranslation()
-  const [mounted, setMounted] = useState(false)
-  const experiences = experienceData.workExperience
-  const expPrefix = "experience"
+  const { t } = useTranslation();
+  const [mounted, setMounted] = useState(false);
+  const experiences = experienceData.workExperience;
+  const [selectedId, setSelectedId] = useState(experiences[0]?.id || "");
+  const expPrefix = "experience";
 
-  // Đảm bảo chỉ render sau khi đã mount ở client để tránh lỗi hydration với i18n
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    setMounted(true);
+  }, []);
 
-  if (!mounted) return <section className="py-32 bg-[#030303] min-h-screen" />
+  if (!mounted) return <section className="py-24 bg-[#09090b] min-h-[500px]" />;
+
+  const currentExp = experiences.find(e => e.id === selectedId) || experiences[0];
 
   return (
-    <section id="experience" className="py-32 bg-[#030303] relative overflow-hidden">
-      {/* Decorative Blur Ambient */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-yellow-500/5 rounded-full blur-[120px] -z-10" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-yellow-500/5 rounded-full blur-[120px] -z-10" />
-
-      <div className="container mx-auto max-w-6xl px-6 relative z-10">
-        {/* Header Section */}
-        <motion.div
-          className="flex flex-col items-center text-center mb-24"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/20 mb-6">
-            <Briefcase className="w-3 h-3 text-yellow-500" />
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-yellow-500">
-              {t(`${expPrefix}.badge`)}
-            </span>
-          </div>
-          <h2 className="text-5xl md:text-6xl font-black mb-6 tracking-tighter text-white uppercase">
-            {t(`${expPrefix}.title`)} <span className="text-yellow-500 italic">{t(`${expPrefix}.subtitle`)}</span>
+    <section id="experience" className="py-24 bg-[#09090b] text-zinc-100 relative">
+      <div className="container mx-auto max-w-5xl px-4 sm:px-6 relative z-10">
+        
+        {/* Section Header */}
+        <div className="mb-12">
+          <span className="text-xs text-yellow-400 font-mono font-semibold uppercase tracking-widest block mb-2">
+            04 / {t(`${expPrefix}.badge`, { defaultValue: "CAREER TIMELINE" })}
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+            {t(`${expPrefix}.title`, { defaultValue: "Work" })} {t(`${expPrefix}.subtitle`, { defaultValue: "Experience" })}
           </h2>
-          <div className="w-20 h-1 bg-yellow-500 mb-8 rounded-full" />
-          <p className="text-zinc-500 max-w-xl text-sm md:text-base leading-relaxed font-medium">
-            {t(`${expPrefix}.description`)}
+          <p className="text-zinc-400 text-sm mt-2 max-w-xl">
+            {t(`${expPrefix}.description`, { defaultValue: "Kinh nghiệm tích lũy qua các dự án doanh nghiệp thực tế và giải pháp phần mềm quy mô lớn." })}
           </p>
-        </motion.div>
+        </div>
 
-        {/* Experience Cards */}
-        <div className="space-y-16">
-          {experiences.map((exp, index) => (
-            <motion.div
-              key={exp.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: "easeOut", delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="group relative"
-            >
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 bg-zinc-900/20 border border-white/5 rounded-[2rem] overflow-hidden backdrop-blur-md hover:border-yellow-500/30 transition-all duration-500 shadow-2xl">
-                
-                {/* Left Side: Branding & Context */}
-                <div className="lg:col-span-4 p-8 lg:p-10 bg-white/[0.02] border-b lg:border-b-0 lg:border-r border-white/5 flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-start justify-between mb-8">
-                      <div className="p-4 bg-yellow-500 rounded-2xl shadow-[0_0_20px_rgba(234,179,8,0.3)]">
-                        <Building2 className="w-7 h-7 text-black" />
-                      </div>
-                      {exp.website && (
-                        <a 
-                          href={exp.website} 
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p-2 rounded-full bg-white/5 text-zinc-500 hover:text-yellow-500 hover:bg-yellow-500/10 transition-all"
-                        >
-                          <ArrowUpRight className="w-5 h-5" />
-                        </a>
-                      )}
+        {/* Master-Detail Tabbed Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
+          
+          {/* Left Column: Role & Company Selector Tabs (Col 4) */}
+          <div className="lg:col-span-4 flex flex-col gap-2.5">
+            <span className="text-xs text-zinc-500 font-mono uppercase tracking-wider px-1 mb-1">
+              {t(`${expPrefix}.select_position`, { defaultValue: "Select Position" })}
+            </span>
+
+            {experiences.map((exp, idx) => {
+              const isSelected = exp.id === currentExp.id;
+              const roleName = t(`${expPrefix}.items.${exp.id}.role`, { defaultValue: exp.role });
+              const companyShort = t(`${expPrefix}.items.${exp.id}.company_short`, { defaultValue: exp.company });
+              const periodText = t(`${expPrefix}.items.${exp.id}.period`, { defaultValue: exp.period });
+
+              return (
+                <button
+                  key={exp.id}
+                  onClick={() => setSelectedId(exp.id)}
+                  className={`group relative p-4 rounded-2xl border text-left transition-all duration-200 flex items-center justify-between cursor-pointer ${
+                    isSelected
+                      ? "bg-zinc-900 border-yellow-500/50 shadow-lg shadow-yellow-500/5"
+                      : "bg-zinc-900/30 border-zinc-800/80 hover:bg-zinc-900/70 hover:border-zinc-700"
+                  }`}
+                >
+                  <div className="flex items-start gap-3 min-w-0">
+                    <div className={`p-2.5 rounded-xl border shrink-0 transition-colors ${
+                      isSelected
+                        ? "bg-yellow-400 text-zinc-950 border-yellow-400"
+                        : "bg-zinc-950 text-zinc-400 border-zinc-800 group-hover:text-yellow-400"
+                    }`}>
+                      <Building2 className="w-4 h-4" />
                     </div>
 
-                    <h3 className="text-2xl font-black text-white mb-2 tracking-tight group-hover:text-yellow-500 transition-colors">
-                      {exp.company}
+                    <div className="overflow-hidden">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-[10px] font-mono text-zinc-500">0{idx + 1}</span>
+                        <span className={`text-[11px] font-mono font-semibold truncate ${
+                          isSelected ? "text-yellow-400" : "text-zinc-400"
+                        }`}>
+                          {periodText}
+                        </span>
+                      </div>
+
+                      <h4 className={`text-xs sm:text-sm font-bold leading-tight truncate ${
+                        isSelected ? "text-white" : "text-zinc-300 group-hover:text-white"
+                      }`}>
+                        {roleName}
+                      </h4>
+
+                      <p className="text-[11px] text-zinc-500 truncate mt-0.5">
+                        {companyShort}
+                      </p>
+                    </div>
+                  </div>
+
+                  <ChevronRight className={`w-4 h-4 shrink-0 transition-transform ${
+                    isSelected ? "text-yellow-400 translate-x-0.5" : "text-zinc-600 opacity-0 group-hover:opacity-100"
+                  }`} />
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Right Column: Detailed Position Showcase (Col 8) */}
+          <div className="lg:col-span-8">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentExp.id}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.25, ease: "easeOut" }}
+                className="p-6 sm:p-7 rounded-3xl bg-zinc-900/40 border border-zinc-800 shadow-xl space-y-6 backdrop-blur-sm"
+              >
+                {/* Header Strip */}
+                <div className="space-y-3 pb-5 border-b border-zinc-800/80">
+                  {/* Top Row: Role + Period + Company Website Button */}
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-2.5 flex-wrap">
+                      <span className="px-2.5 py-0.5 bg-yellow-400/10 text-yellow-400 border border-yellow-500/20 rounded-md text-[11px] font-mono font-bold uppercase">
+                        {t(`${expPrefix}.items.${currentExp.id}.role`, { defaultValue: currentExp.role })}
+                      </span>
+                      <span className="text-xs font-mono text-zinc-400">
+                        {t(`${expPrefix}.items.${currentExp.id}.period`, { defaultValue: currentExp.period })}
+                      </span>
+                    </div>
+
+                    {currentExp.website && (
+                      <a
+                        href={currentExp.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold px-3 py-1.5 bg-zinc-950 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 hover:text-white rounded-xl transition-colors shrink-0 cursor-pointer"
+                      >
+                        <span>{t(`${expPrefix}.company_website`, { defaultValue: "Company Website" })}</span>
+                        <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400" />
+                      </a>
+                    )}
+                  </div>
+
+                  {/* Company Name & Location */}
+                  <div>
+                    <h3 className="text-lg sm:text-xl font-black text-white tracking-tight leading-snug">
+                      {t(`${expPrefix}.items.${currentExp.id}.company`, { defaultValue: currentExp.company })}
                     </h3>
 
-                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 rounded-lg border border-white/10 mb-6 transition-all group-hover:border-yellow-500/30 group-hover:bg-yellow-500/5">
-                      <UserCircle className="w-3.5 h-3.5 text-yellow-500" />
-                      <span className="text-[11px] font-bold text-zinc-200 uppercase tracking-wider">
-                        {t(`${expPrefix}.items.${exp.id}.role`)}
-                      </span>
+                    <div className="flex items-center gap-1.5 text-xs text-zinc-500 mt-1">
+                      <MapPin className="w-3.5 h-3.5" />
+                      <span>{t(`${expPrefix}.items.${currentExp.id}.location`, { defaultValue: currentExp.location })}</span>
                     </div>
-                    
-                    <div className="space-y-2 mb-6">
-                      <div className="flex items-center gap-2 text-xs font-bold text-zinc-400 uppercase tracking-widest">
-                        <Calendar className="w-3.5 h-3.5 text-yellow-500" />
-                        {exp.period}
-                      </div>
-                      <div className="flex items-center gap-2 text-xs font-medium text-zinc-500">
-                        <MapPin className="w-3.5 h-3.5" />
-                        {exp.location}
-                      </div>
-                    </div>
-
-                    <p className="text-zinc-500 text-[13px] leading-relaxed border-l-2 border-yellow-500/20 pl-4 py-1 italic">
-                      {t(`${expPrefix}.items.${exp.id}.summary`)}
-                    </p>
-                  </div>
-
-                  <div className="mt-10 relative aspect-[16/9] rounded-xl overflow-hidden group-hover:shadow-[0_0_30px_rgba(234,179,8,0.1)] transition-all bg-zinc-800">
-                    <Image 
-                      src={exp.previewImage} 
-                      alt={exp.company}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
-                      unoptimized={exp.previewImage.startsWith('http')}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-transparent opacity-60" />
                   </div>
                 </div>
 
-                {/* Right Side: Detailed Projects */}
-                <div className="lg:col-span-8 p-8 lg:p-12 flex flex-col gap-10">
-                  <div>
-                    <div className="flex items-center gap-3 mb-8">
-                      <Code2 className="w-4 h-4 text-yellow-500" />
-                      <span className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-500">
-                        {t(`${expPrefix}.projects_label`)}
-                      </span>
-                    </div>
+                {/* Summary */}
+                <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed border-l-2 border-yellow-400/40 pl-3.5 py-0.5 font-normal">
+                  {t(`${expPrefix}.items.${currentExp.id}.summary`, { defaultValue: currentExp.summary })}
+                </p>
 
-                    <div className="space-y-10">
-                      {exp.projects.map((project, pIdx) => {
-                        const resData = t(`${expPrefix}.items.${exp.id}.projects.${pIdx}.responsibilities`, { returnObjects: true });
+                {/* Projects Detail Block */}
+                <div className="space-y-5">
+                  <span className="text-[11px] font-mono text-zinc-500 uppercase tracking-widest block">
+                    {t(`${expPrefix}.deliverables`, { defaultValue: "Key Projects & Deliverables" })}
+                  </span>
 
-                        return (
-                          <div key={pIdx} className="relative pl-6 border-l border-white/10 hover:border-yellow-500/50 transition-colors group/project">
-                            <div className="absolute -left-[5px] top-0 w-2 h-2 rounded-full bg-zinc-800 group-hover/project:bg-yellow-500 transition-colors" />
-                            
-                            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
-                              <h4 className="text-xl font-bold text-white tracking-tight">
-                                {t(`${expPrefix}.items.${exp.id}.projects.${pIdx}.name`)}
-                              </h4>
-                              <div className="flex flex-wrap gap-2">
-                                {project.techStack.map(tech => (
-                                  <span key={tech} className="px-2 py-0.5 bg-zinc-800 text-zinc-400 text-[9px] font-bold uppercase rounded border border-white/5 group-hover/project:border-yellow-500/30 transition-colors">
-                                    {tech}
-                                  </span>
-                                ))}
-                              </div>
-                            </div>
+                  {currentExp.projects.map((proj, pIdx) => {
+                    const translatedProjName = t(`${expPrefix}.items.${currentExp.id}.projects.${pIdx}.name`, { defaultValue: proj.name });
+                    const translatedResList = t(`${expPrefix}.items.${currentExp.id}.projects.${pIdx}.responsibilities`, { returnObjects: true });
+                    const resItems = Array.isArray(translatedResList) ? translatedResList : proj.responsibilities;
 
-                            <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3">
-                              {Array.isArray(resData) ? resData.map((res, rIdx) => (
-                                <li key={rIdx} className="flex items-start gap-3 text-zinc-400 text-[13px] leading-snug">
-                                  <CheckCircle2 className="w-4 h-4 text-yellow-500/40 mt-0.5 shrink-0" />
-                                  {res}
-                                </li>
-                              )) : (
-                                <li className="text-zinc-500 text-xs italic">N/A</li>
-                              )}
-                            </ul>
+                    return (
+                      <div key={pIdx} className="p-5 rounded-2xl bg-zinc-950/60 border border-zinc-800/80 space-y-3.5">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                          <h4 className="text-sm sm:text-base font-bold text-white tracking-tight flex items-center gap-2">
+                            <Code2 className="w-4 h-4 text-yellow-400 shrink-0" />
+                            <span>{translatedProjName}</span>
+                          </h4>
+
+                          <div className="flex flex-wrap gap-1.5">
+                            {proj.techStack.map((tech) => (
+                              <span key={tech} className="px-2 py-0.5 bg-zinc-900 border border-zinc-800 text-zinc-400 text-[10px] font-mono rounded">
+                                {tech}
+                              </span>
+                            ))}
                           </div>
-                        );
-                      })}
-                    </div>
-                  </div>
+                        </div>
 
-                  {/* Skills Takeaways */}
-                  <div className="mt-auto pt-8 border-t border-white/5">
-                    <span className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-600 mb-5 block">
-                      {t(`${expPrefix}.takeaways_label`)}
-                    </span>
-                    <div className="flex flex-wrap gap-2">
-                      {(() => {
-                        const takeaways = t(`${expPrefix}.items.${exp.id}.takeaways`, { returnObjects: true });
-                        return Array.isArray(takeaways) ? takeaways.map((item, tIdx) => (
-                          <span key={tIdx} className="px-3 py-1.5 bg-yellow-500/5 text-yellow-500/80 text-[10px] font-bold rounded-lg border border-yellow-500/10 hover:bg-yellow-500/10 transition-colors">
+                        <ul className="space-y-2 pt-2 border-t border-zinc-900">
+                          {resItems.map((res: string, rIdx: number) => (
+                            <li key={rIdx} className="flex items-start gap-2.5 text-xs text-zinc-300 leading-relaxed font-normal">
+                              <CheckCircle2 className="w-3.5 h-3.5 text-yellow-400 shrink-0 mt-0.5" />
+                              <span>{res}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Key Takeaways */}
+                {(() => {
+                  const translatedTakeaways = t(`${expPrefix}.items.${currentExp.id}.takeaways`, { returnObjects: true });
+                  const takeawayItems = Array.isArray(translatedTakeaways) ? translatedTakeaways : (currentExp.keyTakeaways || []);
+
+                  return takeawayItems.length > 0 ? (
+                    <div className="pt-4 border-t border-zinc-800/80">
+                      <span className="text-[11px] font-mono text-zinc-500 uppercase tracking-widest block mb-2.5">
+                        {t(`${expPrefix}.takeaways_label`, { defaultValue: "Skills & Key Takeaways" })}
+                      </span>
+                      <div className="flex flex-wrap gap-2">
+                        {takeawayItems.map((item: string, tIdx: number) => (
+                          <span key={tIdx} className="px-2.5 py-1 bg-zinc-950 text-zinc-300 text-xs font-mono rounded-lg border border-zinc-800">
                             # {item}
                           </span>
-                        )) : null;
-                      })()}
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+                  ) : null;
+                })()}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
         </div>
       </div>
     </section>
-  )
+  );
 }

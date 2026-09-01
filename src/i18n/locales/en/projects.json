@@ -3,14 +3,12 @@
     "badge": "Showcase",
     "title": "Featured",
     "subtitle": "Projects",
-    "description": "From concept to execution, these are the dedicated products that showcase my problem-solving skills.",
+    "description": "Open-source repositories and production systems synchronized live in real-time from GitHub.",
+    "all_filter": "All",
+    "no_repos": "No repositories found matching this filter.",
     "preview": "Live Demo",
-    "code": "Source Code",
-    "bike_trade_desc": "Designed a module-based backend system, implemented Auth and RESTful API. Optimized performance and CI/CD.",
-    "ev_app_desc": "Built microservices for electric vehicle management and payments. Integrated Swagger and Docker containerization.",
-    "roles": {
-      "backend": "Backend Developer",
-      "frontend": "Frontend Developer"
-    }
+    "code": "View Code",
+    "live_demo": "Live Demo",
+    "view_repo": "View Repo"
   }
 }
