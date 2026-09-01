@@ -1,7 +1,7 @@
-# 🚀 LVSTANTS — Software Engineering Portfolio & AI Showcase
+# LVSTANTS — Software Engineering Portfolio & AI Showcase
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/lvstants03/lvstants-portfolio/main/public/images/avatar.jpg" alt="Ly Van My Logo" width="120" style="border-radius: 50%; border: 3px solid #eab308;" />
+  <img src="./public/avatar.jpg" alt="Ly Van My Logo" width="120" style="border-radius: 50%; border: 2px solid #eab308;" />
 </p>
 
 <p align="center">
@@ -19,36 +19,36 @@
 
 ---
 
-## 🌟 Key Highlights & Breakthrough Features
+## Key Highlights & Core Features
 
-### 1. 🎙️ Zero-Touch Gemini Voice AI Assistant
-- **Continuous Hands-Free Conversation**: Integrated real-time Web Speech Recognition (`vi-VN` / `en-US`) powered by the **Google Gemini 2.0 Flash** serverless API.
-- **Intent-Driven Screen Navigation**: Automatically detects visitor intents and executes smooth page navigation to `#projects`, `#experience`, `#skills`, `#introduce`, `#certificates`, or automatically triggers CV download.
+### 1. Zero-Touch Gemini Voice AI Assistant
+- **Continuous Hands-Free Conversation**: Integrated real-time Web Speech Recognition (vi-VN and en-US) powered by Google Gemini 2.0 Flash serverless API.
+- **Intent-Driven Screen Navigation**: Automatically detects visitor intents and executes smooth page navigation to #projects, #experience, #skills, #introduce, #certificates, or automatically triggers CV download.
 - **Live Floating Subtitles**: Real-time transcribed feedback bubble with zero viewport obstruction.
 
-### 2. 🖐️ AI Vision Hand Gesture Control (MediaPipe Hands)
-- **Computer Vision in Browser**: 100% client-side WebAssembly landmark tracking with Google MediaPipe Hands (Zero data transmission for total user privacy).
+### 2. AI Vision Hand Gesture Control (MediaPipe Hands)
+- **Computer Vision in Browser**: 100% client-side WebAssembly landmark tracking with Google MediaPipe Hands (zero data transmission for complete user privacy).
 - **Ergonomic Gesture Mapping**:
-  - **1 Index Finger (☝️)**: Continuous smooth **Scroll Up** (-18px/frame).
-  - **2 Fingers Peace Sign (✌️)**: Continuous smooth **Scroll Down** (+18px/frame) without wrist fatigue.
-  - **Fist Gesture (✊)**: Instant **Emergency Brake** (`Velocity = 0`) locking position immediately.
-- **Virtual Float Accumulator**: Subpixel hardware scrolling engine bypassing CSS animation bottlenecks to deliver a rock-solid **60 FPS** experience.
+  - **1 Index Finger**: Continuous smooth Scroll Up (-18px/frame).
+  - **2 Fingers (Victory / Peace)**: Continuous smooth Scroll Down (+18px/frame) without wrist fatigue.
+  - **Fist Gesture**: Instant Emergency Brake (Velocity = 0) locking position immediately.
+- **Virtual Float Accumulator**: Subpixel hardware scrolling engine bypassing CSS animation bottlenecks to deliver a solid 60 FPS experience.
 
-### 3. 🎵 Ambient Lo-Fi Sound Player
+### 3. Ambient Lo-Fi Sound Player
 - **Embedded Audio Engine**: Seamless background lo-fi audio playback powered by YouTube IFrame API.
-- **GPU-Accelerated Equalizer**: Real-time 3-bar rhythm visualizer optimized with `transform: scaleY()` for zero DOM reflow.
+- **GPU-Accelerated Equalizer**: Real-time 3-bar rhythm visualizer optimized with transform: scaleY() for zero DOM reflow.
 
-### 4. 🌐 100% Bilingual Internationalization (EN / VI)
+### 4. 100% Bilingual Internationalization (EN / VI)
 - Comprehensive bilingual content covering all projects, work experience, responsibilities, and system metrics with instant client-side switching.
 
-### 5. ⚡ High-Performance Architecture (60 FPS+)
-- **GPU Acceleration**: Hardware-accelerated `translate3d` spotlight cursor lighting.
-- **Passive ScrollSpy**: IntersectionObserver with `requestAnimationFrame` for lightning-fast section tracking.
-- **Dark Minimalist Aesthetic**: Custom 6px gold-accented scrollbars, fluid Cormorant Garamond / Inter typography, and refined `max-w-5xl` layout.
+### 5. High-Performance Architecture (60 FPS+)
+- **GPU Acceleration**: Hardware-accelerated translate3d spotlight cursor lighting.
+- **Passive ScrollSpy**: IntersectionObserver with requestAnimationFrame for efficient section tracking.
+- **Dark Minimalist Aesthetic**: Custom 6px gold-accented scrollbars, fluid Cormorant Garamond / Inter typography, and refined max-w-5xl layout.
 
 ---
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 | Layer | Technologies |
 | :--- | :--- |
@@ -62,10 +62,10 @@
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
-- Node.js `18.18.0` or higher
+- Node.js 18.18.0 or higher
 - npm, yarn, or pnpm
 
 ### Installation
@@ -91,7 +91,7 @@
    ```bash
    npm run dev
    ```
-   Open [http://localhost:3000](http://localhost:3000) with your browser to explore the portfolio.
+   Open http://localhost:3000 with your browser to explore the portfolio.
 
 5. **Build for production:**
    ```bash
@@ -101,7 +101,7 @@
 
 ---
 
-## 📂 Project Architecture
+## Project Architecture
 
 ```
 portfolio/
@@ -136,9 +136,9 @@ portfolio/
 
 ---
 
-## 👨‍💻 Author
+## Author
 
-**Ly Van My (Lý Văn Mỹ)**  
+**Ly Van My (Ly Van My)**  
 *Software Engineer • CEH Platform • FPT University Graduate*
 
 - **Website**: [portfolio-lvstants.vercel.app](https://portfolio-lvstants.vercel.app)
@@ -149,6 +149,6 @@ portfolio/
 
 ---
 
-## 📄 License
+## License
 
-This project is open-source and licensed under the [MIT License](LICENSE) — © 2026 **Ly Van My (LVSTANTS)**.
+This project is open-source and licensed under the [MIT License](LICENSE) — (c) 2026 **Ly Van My (LVSTANTS)**.
