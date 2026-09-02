@@ -247,7 +247,7 @@ export default function VoiceAIAssistant() {
       const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
       if (SpeechRecognition) {
         const recognition = new SpeechRecognition();
-        recognition.continuous = false;
+        recognition.continuous = true;
         recognition.interimResults = true;
         recognition.lang = "vi-VN";
 
@@ -258,54 +258,73 @@ export default function VoiceAIAssistant() {
         };
 
         recognition.onresult = (event: any) => {
+          if (stateRef.current === "SPEAKING" || stateRef.current === "THINKING") return;
+
           // Khi người dùng cất tiếng nói: Hạ âm lượng nhạc Lo-Fi xuống 15% ngay lập tức
           window.dispatchEvent(new CustomEvent("portfolio:duck-music", { detail: { duck: true } }));
 
-          let fullTranscript = "";
-          for (let i = 0; i < event.results.length; ++i) {
-            fullTranscript += event.results[i][0].transcript + " ";
+          let interimText = "";
+          let finalChunk = "";
+
+          for (let i = event.resultIndex; i < event.results.length; ++i) {
+            const transcript = event.results[i][0].transcript;
+            if (event.results[i].isFinal) {
+              finalChunk += transcript + " ";
+            } else {
+              interimText += transcript;
+            }
           }
-          fullTranscript = fullTranscript.trim();
 
-          if (fullTranscript) {
-            transcriptBufferRef.current = fullTranscript;
-            setUserSpeech(fullTranscript);
+          const currentDisplay = (finalChunk || interimText).trim();
+          if (currentDisplay) {
+            transcriptBufferRef.current = currentDisplay;
+            setUserSpeech(currentDisplay);
+          }
 
-            // VAD Debounce 850ms: Kiên nhẫn chờ người dùng nói hết câu rồi mới kết thúc và gửi AI
+          // Khi phát hiện dứt câu (isFinal) hoặc sau khoảng lặng 900ms: Gửi AI
+          if (finalChunk.trim()) {
+            const textToSend = finalChunk.trim();
+            transcriptBufferRef.current = "";
+            if (vadTimeoutRef.current) clearTimeout(vadTimeoutRef.current);
+            handleSendToAI(textToSend);
+          } else if (interimText.trim()) {
             if (vadTimeoutRef.current) clearTimeout(vadTimeoutRef.current);
             vadTimeoutRef.current = setTimeout(() => {
-              if (recognitionRef.current && isSessionActiveRef.current) {
-                try {
-                  recognitionRef.current.stop();
-                } catch (_) {}
+              const pendingText = transcriptBufferRef.current.trim();
+              if (pendingText && stateRef.current !== "SPEAKING" && stateRef.current !== "THINKING") {
+                transcriptBufferRef.current = "";
+                handleSendToAI(pendingText);
               }
-            }, 850);
+            }, 900);
           }
         };
 
         recognition.onerror = (event: any) => {
-          console.warn("Speech recognition status:", event.error);
-          window.dispatchEvent(new CustomEvent("portfolio:duck-music", { detail: { duck: false } }));
-
-          // Không restart khi gặp aborted hoặc no-speech để tránh vòng lặp dồn dập
+          // Bỏ qua hoàn toàn aborted và no-speech (sự kiện bình thường, không log, không restart dồn dập)
           if (event.error === "aborted" || event.error === "no-speech") {
             return;
           }
 
-          // Khi máy chủ Google bị thắt cổ chai hoặc nghẽn mạng: Nghỉ 2.5 giây (Exponential Backoff)
+          console.warn("Speech recognition notice:", event.error);
+          window.dispatchEvent(new CustomEvent("portfolio:duck-music", { detail: { duck: false } }));
+
+          // Khi máy chủ Google bị nghẽn mạng: Nghỉ 3 giây rồi mới thử lại
           if (event.error === "network") {
             if (restartTimeoutRef.current) clearTimeout(restartTimeoutRef.current);
             restartTimeoutRef.current = setTimeout(() => {
               safeStartListening();
-            }, 2500);
+            }, 3000);
             return;
           }
 
-          // Các lỗi khác: Giãn cách 1 giây rồi mới khởi động lại êm dịu
+          if (event.error === "not-allowed") {
+            setIsLiveActive(false);
+            isLiveActiveRef.current = false;
+            return;
+          }
+
           if (restartTimeoutRef.current) clearTimeout(restartTimeoutRef.current);
-          restartTimeoutRef.current = setTimeout(() => {
-            safeStartListening();
-          }, 1000);
+          restartTimeoutRef.current = setTimeout(safeStartListening, 1500);
         };
 
         recognition.onend = () => {
@@ -314,13 +333,10 @@ export default function VoiceAIAssistant() {
           window.dispatchEvent(new CustomEvent("portfolio:duck-music", { detail: { duck: false } }));
           if (vadTimeoutRef.current) clearTimeout(vadTimeoutRef.current);
 
-          const finalText = transcriptBufferRef.current.trim();
-          if (finalText) {
-            transcriptBufferRef.current = "";
-            handleSendToAI(finalText);
-          } else if (isLiveActiveRef.current && stateRef.current !== "SPEAKING" && stateRef.current !== "THINKING") {
+          // Với continuous = true, nếu vô tình ngắt kết nối phần cứng, restart êm dịu sau 1s
+          if (isLiveActiveRef.current && stateRef.current !== "SPEAKING" && stateRef.current !== "THINKING") {
             if (restartTimeoutRef.current) clearTimeout(restartTimeoutRef.current);
-            restartTimeoutRef.current = setTimeout(safeStartListening, 500);
+            restartTimeoutRef.current = setTimeout(safeStartListening, 1000);
           } else {
             setState("IDLE");
           }
