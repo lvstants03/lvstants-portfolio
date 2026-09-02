@@ -14,14 +14,25 @@ export default function AmbientSoundPlayer() {
 
   const isVi = i18n.language === "vi";
 
+  // Hàm điều chỉnh âm lượng Iframe qua postMessage
+  const setVolumeLevel = useCallback((level: number) => {
+    if (!iframeRef.current || !iframeRef.current.contentWindow) return;
+    iframeRef.current.contentWindow.postMessage(
+      JSON.stringify({ event: "command", func: "setVolume", args: [level] }),
+      "*"
+    );
+  }, []);
+
   const startPlay = useCallback(() => {
     if (!iframeRef.current || !iframeRef.current.contentWindow) return;
     iframeRef.current.contentWindow.postMessage(
       JSON.stringify({ event: "command", func: "playVideo", args: "" }),
       "*"
     );
+    // Hạ âm lượng xuống 50% luôn theo yêu cầu
+    setVolumeLevel(50);
     setIsPlaying(true);
-  }, []);
+  }, [setVolumeLevel]);
 
   const stopPlay = useCallback(() => {
     if (!iframeRef.current || !iframeRef.current.contentWindow) return;
@@ -71,7 +82,18 @@ export default function AmbientSoundPlayer() {
         }
       };
 
+      // Kỹ thuật Audio Ducking: Giảm âm lượng xuống 15% khi người dùng nói, khôi phục 50% khi xong
+      const handleDuckMusic = (e: Event) => {
+        const ce = e as CustomEvent<{ duck?: boolean }>;
+        if (ce.detail?.duck) {
+          setVolumeLevel(15);
+        } else {
+          setVolumeLevel(50);
+        }
+      };
+
       window.addEventListener("portfolio:toggle-music", handleVoiceMusic);
+      window.addEventListener("portfolio:duck-music", handleDuckMusic);
 
       return () => {
         window.removeEventListener("click", handleFirstInteraction);
@@ -79,9 +101,10 @@ export default function AmbientSoundPlayer() {
         window.removeEventListener("scroll", handleFirstInteraction);
         window.removeEventListener("keydown", handleFirstInteraction);
         window.removeEventListener("portfolio:toggle-music", handleVoiceMusic);
+        window.removeEventListener("portfolio:duck-music", handleDuckMusic);
       };
     }
-  }, [startPlay, stopPlay, togglePlay]);
+  }, [setVolumeLevel, startPlay, stopPlay, togglePlay]);
 
   if (!isReady) return null;
 
@@ -108,7 +131,7 @@ export default function AmbientSoundPlayer() {
         />
       </div>
 
-      {/* Floating Ambient Widget (Bottom Left) - Nhỏ gọn, sang trọng */}
+      {/* Floating Ambient Widget (Bottom Left) - Nhỏ gọn, 50% volume */}
       <motion.div
         className="fixed bottom-5 left-5 z-[90]"
         initial={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -150,10 +173,10 @@ export default function AmbientSoundPlayer() {
           {/* Label text */}
           <div className="flex flex-col text-left">
             <span className="text-[10px] font-mono font-semibold uppercase tracking-wider leading-none">
-              {isPlaying ? "Lo-Fi Vibe" : (isVi ? "Âm thanh" : "Ambient")}
+              {isPlaying ? "Lo-Fi 50%" : (isVi ? "Âm thanh" : "Ambient")}
             </span>
             <span className="text-[8px] font-mono text-zinc-500 leading-none mt-0.5">
-              {isPlaying ? (isVi ? "Tự động phát" : "Auto-Playing") : (isVi ? "Bấm để bật" : "Click to play")}
+              {isPlaying ? (isVi ? "Âm lượng 50%" : "Volume 50%") : (isVi ? "Bấm để bật" : "Click to play")}
             </span>
           </div>
         </button>

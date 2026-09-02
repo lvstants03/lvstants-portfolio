@@ -22,6 +22,7 @@ export default function VoiceAIAssistant() {
   const stateRef = useRef<AIState>("IDLE");
   const transcriptBufferRef = useRef<string>("");
   const toastTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const vadTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     isLiveActiveRef.current = isLiveActive;
@@ -256,24 +257,43 @@ export default function VoiceAIAssistant() {
         };
 
         recognition.onresult = (event: any) => {
-          let currentText = "";
-          for (let i = event.resultIndex; i < event.results.length; ++i) {
-            currentText += event.results[i][0].transcript;
+          // Khi người dùng cất tiếng nói: Hạ âm lượng nhạc Lo-Fi xuống 15% ngay lập tức
+          window.dispatchEvent(new CustomEvent("portfolio:duck-music", { detail: { duck: true } }));
+
+          let fullTranscript = "";
+          for (let i = 0; i < event.results.length; ++i) {
+            fullTranscript += event.results[i][0].transcript + " ";
           }
-          if (currentText.trim()) {
-            transcriptBufferRef.current = currentText.trim();
-            setUserSpeech(currentText.trim());
+          fullTranscript = fullTranscript.trim();
+
+          if (fullTranscript) {
+            transcriptBufferRef.current = fullTranscript;
+            setUserSpeech(fullTranscript);
+
+            // VAD Debounce 850ms: Kiên nhẫn chờ người dùng nói hết câu rồi mới kết thúc và gửi AI
+            if (vadTimeoutRef.current) clearTimeout(vadTimeoutRef.current);
+            vadTimeoutRef.current = setTimeout(() => {
+              if (recognitionRef.current) {
+                try {
+                  recognitionRef.current.stop();
+                } catch (_) {}
+              }
+            }, 850);
           }
         };
 
         recognition.onerror = (event: any) => {
           console.warn("Speech recognition status:", event.error);
+          window.dispatchEvent(new CustomEvent("portfolio:duck-music", { detail: { duck: false } }));
           if (isLiveActiveRef.current && stateRef.current !== "SPEAKING" && stateRef.current !== "THINKING") {
             setTimeout(safeStartListening, 400);
           }
         };
 
         recognition.onend = () => {
+          window.dispatchEvent(new CustomEvent("portfolio:duck-music", { detail: { duck: false } }));
+          if (vadTimeoutRef.current) clearTimeout(vadTimeoutRef.current);
+
           const finalText = transcriptBufferRef.current.trim();
           if (finalText) {
             transcriptBufferRef.current = "";
