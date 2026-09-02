@@ -310,6 +310,24 @@ export default function HandGestureScroll() {
     }
   };
 
+  // Lắng nghe lệnh từ Voice AI ("Bật camera" / "Tắt camera")
+  useEffect(() => {
+    const handleVoiceCamera = (e: Event) => {
+      const ce = e as CustomEvent<{ enable?: boolean }>;
+      if (ce.detail?.enable === true) {
+        if (!isActive) startCamera();
+      } else if (ce.detail?.enable === false) {
+        if (isActive) stopCamera();
+      } else {
+        if (isActive) stopCamera();
+        else startCamera();
+      }
+    };
+
+    window.addEventListener("portfolio:toggle-camera", handleVoiceCamera);
+    return () => window.removeEventListener("portfolio:toggle-camera", handleVoiceCamera);
+  }, [isActive]);
+
   return (
     <div className="fixed top-5 right-5 z-[100] flex flex-col items-end gap-2.5 pointer-events-none">
       {/* Nút Kích hoạt Camera Cử chỉ ở góc trên bên phải */}

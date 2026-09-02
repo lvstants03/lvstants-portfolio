@@ -27,6 +27,19 @@ export default function ProjectSections() {
 
   useEffect(() => {
     setMounted(true);
+
+    const handleVoiceFilter = (e: Event) => {
+      const ce = e as CustomEvent<{ target?: string }>;
+      if (ce.detail?.target) {
+        if (ce.detail.target.toLowerCase() === "all") {
+          setActiveFilter("ALL");
+        } else {
+          setActiveFilter(ce.detail.target);
+        }
+      }
+    };
+    window.addEventListener("portfolio:filter-projects", handleVoiceFilter);
+    return () => window.removeEventListener("portfolio:filter-projects", handleVoiceFilter);
   }, []);
 
   // Compute available languages for filtering
