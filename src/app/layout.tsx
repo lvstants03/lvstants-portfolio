@@ -22,18 +22,18 @@ const cormorant = Cormorant_Garamond({
 });
 
 // Link mShots đã được mã hóa chuẩn
-const shareImage = "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fportfolio-lvstants.vercel.app%2F?w=1200&h=630";
+const shareImage = "https://s.wordpress.com/mshots/v1/https%3A%2F%2Flvstants-portfolio.vercel.app%2F?w=1200&h=630";
 
 export const metadata: Metadata = {
   title: {
     default: "Lý Văn Mỹ | Full-stack Developer & Software Engineer",
     template: "%s | Lý Văn Mỹ"
   },
-  description: "Lý Văn Mỹ (Lunartist) - Chuyên gia phát triển Full-stack với kinh nghiệm về MERN Stack, Next.js , NestJs và hệ thống .NET.",
-  generator: 'lunarist.dev',
-  keywords: ["Lý Văn Mỹ", "Lunartist", "Fullstack Developer", "Software Engineer", "MERN Stack", "Next.js", "NestJs"],
-  authors: [{ name: "Lý Văn Mỹ", url: "https://portfolio-lvstants.vercel.app" }],
-  metadataBase: new URL('https://portfolio-lvstants.vercel.app'),
+  description: "Lý Văn Mỹ (LVSTANTS) - Chuyên gia phát triển Full-stack với kinh nghiệm về MERN Stack, Next.js, NestJS và hệ thống .NET.",
+  generator: 'lvstants.dev',
+  keywords: ["Lý Văn Mỹ", "LVSTANTS", "Fullstack Developer", "Software Engineer", "MERN Stack", "Next.js", "NestJs"],
+  authors: [{ name: "Lý Văn Mỹ", url: "https://lvstants-portfolio.vercel.app" }],
+  metadataBase: new URL('https://lvstants-portfolio.vercel.app'),
   alternates: {
     canonical: '/',
   },
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Lý Văn Mỹ | Portfolio - Full-stack Developer",
     description: "Khám phá các dự án công nghệ và kỹ năng lập trình Full-stack của Lý Văn Mỹ.",
-    url: "https://portfolio-lvstants.vercel.app",
+    url: "https://lvstants-portfolio.vercel.app",
     siteName: "Lý Văn Mỹ Portfolio",
     locale: "vi_VN",
     type: "website",

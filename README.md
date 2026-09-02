@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="https://portfolio-lvstants.vercel.app"><img src="https://img.shields.io/badge/Live_Demo-portfolio--lvstants.vercel.app-eab308?style=for-the-badge&logo=vercel" alt="Live Demo" /></a>
+  <a href="https://lvstants-portfolio.vercel.app"><img src="https://img.shields.io/badge/Live_Demo-lvstants--portfolio.vercel.app-eab308?style=for-the-badge&logo=vercel" alt="Live Demo" /></a>
   <a href="https://github.com/lvstants03/lvstants-portfolio"><img src="https://img.shields.io/badge/Next.js-15.2.4-black?style=for-the-badge&logo=next.js" alt="Next.js 15" /></a>
   <a href="https://react.dev/"><img src="https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react" alt="React 19" /></a>
   <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript" alt="TypeScript" /></a>
@@ -141,7 +141,7 @@ portfolio/
 **Ly Van My (Ly Van My)**  
 *Software Engineer • CEH Platform • FPT University Graduate*
 
-- **Website**: [portfolio-lvstants.vercel.app](https://portfolio-lvstants.vercel.app)
+- **Website**: [lvstants-portfolio.vercel.app](https://lvstants-portfolio.vercel.app)
 - **GitHub**: [@lvstants03](https://github.com/lvstants03)
 - **LinkedIn**: [Ly Van My](https://www.linkedin.com/in/m%E1%BB%B9-l%C3%BD-v%C4%83n-1b5427242/)
 - **Facebook**: [Myx2406](https://www.facebook.com/Myx2406/)
