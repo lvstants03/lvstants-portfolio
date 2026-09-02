@@ -23,6 +23,9 @@ export default function VoiceAIAssistant() {
   const transcriptBufferRef = useRef<string>("");
   const toastTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const vadTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const isSessionActiveRef = useRef(false);
+  const isStartingRef = useRef(false);
+  const restartTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     isLiveActiveRef.current = isLiveActive;
@@ -48,27 +51,23 @@ export default function VoiceAIAssistant() {
     }, 4000);
   };
 
-  // Khởi động lắng nghe an toàn liên tục
+  // Khởi động lắng nghe an toàn liên tục (chống gọi start() trùng lặp tuyệt đối)
   const safeStartListening = useCallback(() => {
     if (!isLiveActiveRef.current) return;
+    if (stateRef.current === "SPEAKING" || stateRef.current === "THINKING") return;
+    if (isSessionActiveRef.current || isStartingRef.current) return;
 
     if (recognitionRef.current) {
       try {
+        isStartingRef.current = true;
         transcriptBufferRef.current = "";
         recognitionRef.current.lang = "vi-VN";
         recognitionRef.current.start();
-      } catch (err) {
-        try {
-          recognitionRef.current.stop();
-        } catch (_) {}
-        setTimeout(() => {
-          if (isLiveActiveRef.current && stateRef.current !== "SPEAKING" && stateRef.current !== "THINKING") {
-            try {
-              transcriptBufferRef.current = "";
-              recognitionRef.current.start();
-            } catch (_) {}
-          }
-        }, 300);
+      } catch (err: any) {
+        isStartingRef.current = false;
+        if (err?.name === "InvalidStateError") {
+          isSessionActiveRef.current = true;
+        }
       }
     }
   }, []);
@@ -253,6 +252,8 @@ export default function VoiceAIAssistant() {
         recognition.lang = "vi-VN";
 
         recognition.onstart = () => {
+          isStartingRef.current = false;
+          isSessionActiveRef.current = true;
           setState("LISTENING");
         };
 
@@ -273,7 +274,7 @@ export default function VoiceAIAssistant() {
             // VAD Debounce 850ms: Kiên nhẫn chờ người dùng nói hết câu rồi mới kết thúc và gửi AI
             if (vadTimeoutRef.current) clearTimeout(vadTimeoutRef.current);
             vadTimeoutRef.current = setTimeout(() => {
-              if (recognitionRef.current) {
+              if (recognitionRef.current && isSessionActiveRef.current) {
                 try {
                   recognitionRef.current.stop();
                 } catch (_) {}
@@ -285,12 +286,31 @@ export default function VoiceAIAssistant() {
         recognition.onerror = (event: any) => {
           console.warn("Speech recognition status:", event.error);
           window.dispatchEvent(new CustomEvent("portfolio:duck-music", { detail: { duck: false } }));
-          if (isLiveActiveRef.current && stateRef.current !== "SPEAKING" && stateRef.current !== "THINKING") {
-            setTimeout(safeStartListening, 400);
+
+          // Không restart khi gặp aborted hoặc no-speech để tránh vòng lặp dồn dập
+          if (event.error === "aborted" || event.error === "no-speech") {
+            return;
           }
+
+          // Khi máy chủ Google bị thắt cổ chai hoặc nghẽn mạng: Nghỉ 2.5 giây (Exponential Backoff)
+          if (event.error === "network") {
+            if (restartTimeoutRef.current) clearTimeout(restartTimeoutRef.current);
+            restartTimeoutRef.current = setTimeout(() => {
+              safeStartListening();
+            }, 2500);
+            return;
+          }
+
+          // Các lỗi khác: Giãn cách 1 giây rồi mới khởi động lại êm dịu
+          if (restartTimeoutRef.current) clearTimeout(restartTimeoutRef.current);
+          restartTimeoutRef.current = setTimeout(() => {
+            safeStartListening();
+          }, 1000);
         };
 
         recognition.onend = () => {
+          isStartingRef.current = false;
+          isSessionActiveRef.current = false;
           window.dispatchEvent(new CustomEvent("portfolio:duck-music", { detail: { duck: false } }));
           if (vadTimeoutRef.current) clearTimeout(vadTimeoutRef.current);
 
@@ -299,7 +319,8 @@ export default function VoiceAIAssistant() {
             transcriptBufferRef.current = "";
             handleSendToAI(finalText);
           } else if (isLiveActiveRef.current && stateRef.current !== "SPEAKING" && stateRef.current !== "THINKING") {
-            setTimeout(safeStartListening, 300);
+            if (restartTimeoutRef.current) clearTimeout(restartTimeoutRef.current);
+            restartTimeoutRef.current = setTimeout(safeStartListening, 500);
           } else {
             setState("IDLE");
           }
