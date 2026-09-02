@@ -33,27 +33,27 @@ export default function Portfolio() {
       <VerticalNav activeSection={activeSection ?? undefined} sectionIds={sectionIds} />
 
       <main className="relative z-10">
-        <section id="home">
+        <section id="home" className="scroll-mt-28">
           <HomeView />
         </section>
 
-        <section id="introduce" className="border-t border-zinc-900">
+        <section id="introduce" className="border-t border-zinc-900 scroll-mt-28">
           <AboutSection />
         </section>
 
-        <section id="skills" className="border-t border-zinc-900">
+        <section id="skills" className="border-t border-zinc-900 scroll-mt-28">
           <SkillsSection />
         </section>
 
-        <section id="projects" className="border-t border-zinc-900">
+        <section id="projects" className="border-t border-zinc-900 scroll-mt-28">
           <ProjectSections />
         </section>
 
-        <section id="certificates" className="border-t border-zinc-900">
+        <section id="certificates" className="border-t border-zinc-900 scroll-mt-28">
           <CertificatesSection />
         </section>
 
-        <section id="experience" className="border-t border-zinc-900 pb-28">
+        <section id="experience" className="border-t border-zinc-900 pb-28 scroll-mt-28">
           <ExperienceSection />
         </section>
       </main>

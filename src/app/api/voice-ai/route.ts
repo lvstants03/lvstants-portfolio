@@ -100,7 +100,7 @@ QUY TẮC PHẢN HỒI (BẮT BUỘC):
       action = "NAVIGATE_SECTION";
       target = "projects";
     } else if (lower.includes("kinh nghiệm") || lower.includes("làm việc") || lower.includes("ceh") || lower.includes("quá trình") || lower.includes("experience")) {
-      response = "Đang chuyển đến phần Kinh nghiệm làm việc. Mỹ có hơn 2 năm thực chiến xây dựng hệ thống điều hành cảng biển TOS và giao diện ngân hàng BIDV.";
+      response = "Đang chuyển đến phần Kinh nghiệm làm việc. Mỹ có kinh nghiệm thực chiến từ đầu năm 2025 đến nay tại CEH Platform, chuyên xây dựng hệ thống điều hành cảng biển TOS GTOS và giao diện ngân hàng BIDV.";
       action = "NAVIGATE_SECTION";
       target = "experience";
     } else if (lower.includes("kỹ năng") || lower.includes("công nghệ") || lower.includes("ngôn ngữ") || lower.includes("skill") || lower.includes("tech")) {

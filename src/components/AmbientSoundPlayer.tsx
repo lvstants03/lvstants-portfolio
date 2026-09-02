@@ -9,9 +9,17 @@ export default function AmbientSoundPlayer() {
   const { i18n } = useTranslation();
   const [isPlaying, setIsPlaying] = useState(false);
   const [isReady, setIsReady] = useState(false);
+  const [origin, setOrigin] = useState("");
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const isVi = i18n.language === "vi";
+
+  useEffect(() => {
+    setIsReady(true);
+    if (typeof window !== "undefined") {
+      setOrigin(window.location.origin);
+    }
+  }, []);
 
   // Gửi lệnh play / pause qua YouTube postMessage
   const togglePlay = () => {
@@ -32,23 +40,28 @@ export default function AmbientSoundPlayer() {
     }
   };
 
-  useEffect(() => {
-    setIsReady(true);
-  }, []);
-
   if (!isReady) return null;
+
+  // URL YouTube embed với dynamic origin và enablejsapi
+  const youtubeSrc = `https://www.youtube-nocookie.com/embed/XCRZQW3_Ur4?enablejsapi=1&loop=1&playlist=XCRZQW3_Ur4&playsinline=1${
+    origin ? `&origin=${encodeURIComponent(origin)}` : ""
+  }`;
 
   return (
     <>
-      {/* Hidden YouTube IFrame */}
-      <div className="hidden pointer-events-none" aria-hidden="true">
+      {/* Live IFrame trong DOM (không dùng display:none để trình duyệt không đóng băng audio) */}
+      <div 
+        className="fixed -bottom-10 -left-10 w-1 h-1 opacity-0 pointer-events-none overflow-hidden z-[-1]" 
+        aria-hidden="true"
+      >
         <iframe
           ref={iframeRef}
           width="200"
           height="200"
-          src="https://www.youtube-nocookie.com/embed/XCRZQW3_Ur4?enablejsapi=1&loop=1&playlist=XCRZQW3_Ur4&origin=http://localhost:3000"
+          src={youtubeSrc}
           title="Ambient Music Player"
-          allow="autoplay; encrypted-media"
+          allow="autoplay; encrypted-media; picture-in-picture"
+          tabIndex={-1}
         />
       </div>
 

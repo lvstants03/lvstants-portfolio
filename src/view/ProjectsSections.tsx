@@ -168,29 +168,34 @@ export default function ProjectSections() {
                     </div>
 
                     {/* Footer Actions */}
-                    <div className="pt-4 border-t border-zinc-800/80 flex items-center justify-between">
-                      <div className="flex items-center gap-1.5 text-zinc-500 text-[11px] font-mono">
-                        <Clock className="w-3 h-3 text-yellow-400/80" />
-                        <span>{new Date(repo.updatedAt).toLocaleDateString("vi-VN")}</span>
+                    <div className="pt-3.5 border-t border-zinc-800/80 mt-auto">
+                      <div className="flex items-center justify-between text-zinc-500 text-[11px] font-mono mb-2.5">
+                        <div className="flex items-center gap-1.5">
+                          <Clock className="w-3 h-3 text-yellow-400/80" />
+                          <span>{new Date(repo.updatedAt).toLocaleDateString("vi-VN")}</span>
+                        </div>
+                        <span className="text-[10px] text-zinc-600 font-mono uppercase">GitHub</span>
                       </div>
 
-                      <div className="flex items-center gap-2">
+                      <div className={`grid ${repo.homepage ? "grid-cols-2" : "grid-cols-1"} gap-2`}>
                         {repo.homepage && (
                           <Button
                             size="sm"
                             onClick={() => window.open(repo.homepage, "_blank")}
-                            className="h-8 px-3 bg-yellow-400 text-zinc-950 hover:bg-yellow-300 font-bold text-[11px] uppercase rounded-lg shadow-sm cursor-pointer"
+                            className="h-8 w-full bg-yellow-400 text-zinc-950 hover:bg-yellow-300 font-bold text-[11px] uppercase rounded-lg shadow-sm cursor-pointer flex items-center justify-center gap-1.5"
                           >
-                            <ExternalLink className="w-3 h-3 mr-1" /> {t(`${p}.live_demo`, { defaultValue: "Demo" })}
+                            <ExternalLink className="w-3 h-3" />
+                            <span>{t(`${p}.live_demo`, { defaultValue: "Live Demo" })}</span>
                           </Button>
                         )}
                         <Button
                           size="sm"
                           variant="outline"
                           onClick={() => window.open(repo.url, "_blank")}
-                          className="h-8 px-3 border-zinc-800 bg-zinc-950 text-zinc-300 hover:bg-zinc-800 hover:text-white font-medium text-[11px] uppercase rounded-lg cursor-pointer"
+                          className="h-8 w-full border-zinc-800 bg-zinc-950 text-zinc-300 hover:bg-zinc-800 hover:text-white font-medium text-[11px] uppercase rounded-lg cursor-pointer flex items-center justify-center gap-1.5"
                         >
-                          <Github className="w-3.5 h-3.5 mr-1" /> {t(`${p}.view_repo`, { defaultValue: "Repo" })}
+                          <Github className="w-3.5 h-3.5" />
+                          <span>{t(`${p}.view_repo`, { defaultValue: "View Repo" })}</span>
                         </Button>
                       </div>
                     </div>

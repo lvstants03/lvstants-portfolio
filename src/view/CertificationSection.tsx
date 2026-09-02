@@ -31,10 +31,10 @@ export default function CertificatesSection() {
     setMounted(true);
   }, []);
 
-  if (!mounted) return <section id="certificates" className="py-24 bg-[#09090b] min-h-[500px]" />;
+  if (!mounted) return <div className="py-24 bg-[#09090b] min-h-[500px]" />;
 
   return (
-    <section id="certificates" className="py-24 bg-[#09090b] px-4 relative text-zinc-100">
+    <div className="py-24 bg-[#09090b] px-4 relative text-zinc-100">
       <div className="container mx-auto max-w-5xl px-4 sm:px-6 relative z-10">
         
         {/* Section Header */}
@@ -65,26 +65,26 @@ export default function CertificatesSection() {
                 <div>
                   {/* Top Badges */}
                   <div className="flex items-center justify-between gap-2 mb-4">
-                    <span className="px-2.5 py-1 bg-yellow-400/10 text-yellow-400 border border-yellow-500/20 rounded-md text-[10px] font-mono font-bold uppercase tracking-wider">
+                    <span className="px-2.5 py-1 bg-yellow-400/10 text-yellow-400 border border-yellow-500/20 rounded-md text-[10px] font-mono font-bold uppercase tracking-wider truncate max-w-[170px]">
                       {cert.organization}
                     </span>
 
-                    <div className="inline-flex items-center gap-1 text-[11px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+                    <div className="inline-flex items-center gap-1 text-[11px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20 shrink-0">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                       <span>Verified</span>
                     </div>
                   </div>
 
-                  {/* Title */}
-                  <div className="flex items-start gap-2.5 mb-3">
+                  {/* Title with standardized height */}
+                  <div className="flex items-start gap-2.5 mb-3 min-h-[48px]">
                     <Award className="w-5 h-5 text-yellow-400 shrink-0 mt-0.5" />
-                    <h3 className="text-base font-bold text-white tracking-tight leading-snug group-hover:text-yellow-400 transition-colors">
+                    <h3 className="text-sm font-bold text-white tracking-tight leading-snug group-hover:text-yellow-400 transition-colors line-clamp-2">
                       {cert.name}
                     </h3>
                   </div>
 
-                  {/* Description */}
-                  <p className="text-zinc-400 text-xs leading-relaxed mb-6 font-normal min-h-[36px]">
+                  {/* Description with standardized height */}
+                  <p className="text-zinc-400 text-xs leading-relaxed mb-6 font-normal min-h-[36px] line-clamp-2">
                     {t(`certificates.items.${cert.id}`, { defaultValue: cert.description || "Chứng chỉ chuyên môn quốc tế." })}
                   </p>
                 </div>
@@ -118,6 +118,6 @@ export default function CertificatesSection() {
         </div>
 
       </div>
-    </section>
+    </div>
   );
 }
