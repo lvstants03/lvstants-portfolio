@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import avatarImg from "../../public/avatar.jpg";
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Mail, Facebook, Download, ArrowUpRight, MapPin, GraduationCap, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -204,11 +205,12 @@ export default function HomeView() {
             <div className="relative p-2.5 rounded-3xl bg-zinc-900/60 border border-zinc-800 shadow-2xl backdrop-blur-md max-w-sm w-full">
               <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-zinc-950 border border-zinc-800">
                 <Image 
-                  src={homeData.avatar} 
+                  src={avatarImg} 
                   alt={homeData.name} 
                   fill
                   priority
                   loading="eager"
+                  placeholder="blur"
                   sizes="(max-width: 768px) 384px, 400px"
                   className="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-500"
                 />

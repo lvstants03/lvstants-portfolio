@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, startTransition } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -121,8 +121,12 @@ export default function Header({ activeSection = "home", onNavigate }: HeaderPro
                 <button
                   key={item.id}
                   onClick={() => {
-                    handleSmoothScroll(item.id);
-                    onNavigate?.(item.id);
+                    startTransition(() => {
+                      onNavigate?.(item.id);
+                    });
+                    requestAnimationFrame(() => {
+                      handleSmoothScroll(item.id);
+                    });
                   }}
                   className={`px-3.5 py-1.5 rounded-full text-xs font-medium tracking-tight transition-all duration-200 relative cursor-pointer ${
                     isActive
