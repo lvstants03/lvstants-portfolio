@@ -1,14 +1,16 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import HomeView from "./HomeSection";
-import AboutSection from "./AboutSection";
-import SkillsSection from "./SkillsSection";
 import Header from "./Header";
-import CertificatesSection from "./CertificationSection";
-import ProjectSections from "./ProjectsSections";
-import ExperienceSection from "./ExperienceSection";
 import SpotlightEffect from "@/components/SpotlightEffect";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
+
+const AboutSection = dynamic(() => import("./AboutSection"));
+const SkillsSection = dynamic(() => import("./SkillsSection"));
+const ProjectSections = dynamic(() => import("./ProjectsSections"));
+const CertificatesSection = dynamic(() => import("./CertificationSection"));
+const ExperienceSection = dynamic(() => import("./ExperienceSection"));
 import { useScrollSpy } from "@/hooks/useScrollSpy";
 import { VerticalNav } from "@/components/VerticalNav";
 

@@ -2,9 +2,7 @@ import { Inter, Cormorant_Garamond } from "next/font/google";
 import Footer from "../view/Footer";
 import { Metadata } from "next";
 import Header from "@/view/Header";
-import AmbientSoundPlayer from "@/components/AmbientSoundPlayer";
-import VoiceAIAssistant from "@/components/VoiceAIAssistant";
-import HandGestureScroll from "@/components/HandGestureScroll";
+import InteractiveWidgets from "@/components/InteractiveWidgets";
 import '../styles/globals.css';
 import I18nProvider from "@/config/i18/I18nProvider";
 
@@ -77,6 +75,37 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://lvstants-portfolio.vercel.app/#person",
+      name: "Lý Văn Mỹ",
+      alternateName: "LVSTANTS",
+      jobTitle: "Software Engineer & Full-stack Developer",
+      url: "https://lvstants-portfolio.vercel.app",
+      image: "https://lvstants-portfolio.vercel.app/avatar.jpg",
+      sameAs: [
+        "https://github.com/lvstants03",
+        "https://www.linkedin.com/in/m%E1%BB%B9-l%C3%BD-v%C4%83n-1b5427242/",
+        "https://www.facebook.com/Myx2406/",
+      ],
+      description: "Chuyên gia phát triển Full-stack với kinh nghiệm về MERN Stack, Next.js, NestJS và hệ thống .NET.",
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://lvstants-portfolio.vercel.app/#website",
+      url: "https://lvstants-portfolio.vercel.app",
+      name: "Lý Văn Mỹ Portfolio",
+      publisher: {
+        "@id": "https://lvstants-portfolio.vercel.app/#person",
+      },
+      inLanguage: ["vi", "en"],
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -85,13 +114,15 @@ export default function RootLayout({
   return (
     <html lang="vi" className={`${inter.variable} ${cormorant.variable} scroll-smooth`} suppressHydrationWarning>
       <body className="font-body bg-black antialiased" suppressHydrationWarning>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <I18nProvider>
           <main className="min-h-screen">
             {children}
           </main>
-          <AmbientSoundPlayer />
-          <HandGestureScroll />
-          <VoiceAIAssistant />
+          <InteractiveWidgets />
           <Footer />
         </I18nProvider>
       </body>

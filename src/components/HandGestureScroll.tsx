@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, startTransition } from "react";
 import { Camera, Hand, Eye, X, ArrowUp, ArrowDown, OctagonAlert } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -25,24 +25,32 @@ export default function HandGestureScroll() {
   const scrollPosRef = useRef<number>(0);
   const gestureHistoryRef = useRef<GestureState[]>([]);
 
-  // Vòng lặp cuộn Virtual Float 60 FPS mượt tuyệt đối như băng chuyền
+  // Vòng lặp cuộn Virtual Float mượt mà khi camera bật
   useEffect(() => {
+    if (!isActive) {
+      if (scrollAnimRef.current) {
+        cancelAnimationFrame(scrollAnimRef.current);
+        scrollAnimRef.current = null;
+      }
+      return;
+    }
+
     const scrollLoop = () => {
       const now = Date.now();
 
       if (isFistRef.current) {
-        // Phanh khẩn cấp
+        // Phanh khan cap
         currentVelocityRef.current = 0;
         targetVelocityRef.current = 0;
         scrollPosRef.current = window.scrollY;
       } else {
-        // Hãm phanh mềm mại khi không có tín hiệu tay
+        // Ham phanh mem mai khi khong co tin hieu tay
         if (now - lastDetectedTimeRef.current > 250) {
           targetVelocityRef.current *= 0.85;
           if (Math.abs(targetVelocityRef.current) < 0.2) targetVelocityRef.current = 0;
         }
 
-        // Tăng tốc / giảm tốc mềm mại
+        // Tang toc / giam toc mem mai
         currentVelocityRef.current += (targetVelocityRef.current - currentVelocityRef.current) * 0.18;
 
         if (Math.abs(currentVelocityRef.current) > 0.2) {
@@ -66,9 +74,12 @@ export default function HandGestureScroll() {
     scrollAnimRef.current = requestAnimationFrame(scrollLoop);
 
     return () => {
-      if (scrollAnimRef.current) cancelAnimationFrame(scrollAnimRef.current);
+      if (scrollAnimRef.current) {
+        cancelAnimationFrame(scrollAnimRef.current);
+        scrollAnimRef.current = null;
+      }
     };
-  }, []);
+  }, [isActive]);
 
   const getDistance = (p1: { x: number; y: number }, p2: { x: number; y: number }) => {
     return Math.hypot(p1.x - p2.x, p1.y - p2.y);
@@ -226,11 +237,16 @@ export default function HandGestureScroll() {
     ctx.restore();
   }, []);
 
-  // Khởi động Camera và MediaPipe
+  // Khoi dong Camera va MediaPipe
   const startCamera = async () => {
-    setIsActive(true);
-    setIsLoaded(false);
+    startTransition(() => {
+      setIsActive(true);
+      setIsLoaded(false);
+    });
     scrollPosRef.current = window.scrollY;
+
+    // Nhuong Main Thread 1 tick de trinh duyet render trang thai nut bam ngay lap tuc
+    await new Promise((resolve) => setTimeout(resolve, 0));
 
     try {
       if (!(window as any).Hands) {
@@ -280,23 +296,29 @@ export default function HandGestureScroll() {
 
         await camera.start();
         cameraInstanceRef.current = camera;
-        setIsLoaded(true);
+        startTransition(() => {
+          setIsLoaded(true);
+        });
       }
     } catch (err) {
-      console.error("Lỗi khởi động MediaPipe Camera:", err);
-      setIsActive(false);
+      console.error("Loi khoi dong MediaPipe Camera:", err);
+      startTransition(() => {
+        setIsActive(false);
+      });
     }
   };
 
-  // Dừng Camera
+  // Dung Camera
   const stopCamera = () => {
     currentVelocityRef.current = 0;
     targetVelocityRef.current = 0;
     isFistRef.current = false;
-    setGesture("IDLE");
-    setIsActive(false);
-    setIsLoaded(false);
     gestureHistoryRef.current = [];
+    startTransition(() => {
+      setGesture("IDLE");
+      setIsActive(false);
+      setIsLoaded(false);
+    });
 
     if (cameraInstanceRef.current) {
       try {

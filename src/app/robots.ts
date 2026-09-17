@@ -14,7 +14,6 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
       },
     ],
-    // Nếu bạn chưa có sitemap, bạn có thể để trống hoặc xóa dòng này
-    // sitemap: 'https://lvstants-portfolio.vercel.app/sitemap.xml',
+    sitemap: 'https://lvstants-portfolio.vercel.app/sitemap.xml',
   }
 }

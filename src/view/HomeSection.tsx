@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Github, Linkedin, Mail, Facebook, Download, ArrowUpRight, MapPin, GraduationCap, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation, Trans } from "react-i18next";
@@ -207,16 +207,15 @@ export default function HomeView() {
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
           >
             <div className="relative p-2.5 rounded-3xl bg-zinc-900/60 border border-zinc-800 shadow-2xl backdrop-blur-md max-w-sm w-full">
-              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-zinc-950">
-                <Avatar className="w-full h-full rounded-2xl border border-zinc-800">
-                  <AvatarImage 
-                    src={homeData.avatar} 
-                    alt={homeData.name} 
-                    className="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-500"
-                    sizes="(max-width: 768px) 300px, 400px" 
-                  />
-                  <AvatarFallback className="bg-zinc-900 text-white font-bold text-2xl">MY</AvatarFallback>
-                </Avatar>
+              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-zinc-950 border border-zinc-800">
+                <Image 
+                  src={homeData.avatar} 
+                  alt={homeData.name} 
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 384px, 400px"
+                  className="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-500"
+                />
               </div>
 
               {/* Clean Footer Strip on Portrait */}

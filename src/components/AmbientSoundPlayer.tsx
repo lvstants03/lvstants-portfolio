@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, startTransition } from "react";
 import { VolumeX } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
@@ -9,12 +9,13 @@ export default function AmbientSoundPlayer() {
   const { i18n } = useTranslation();
   const [isPlaying, setIsPlaying] = useState(false);
   const [isReady, setIsReady] = useState(false);
+  const [hasMountedIframe, setHasMountedIframe] = useState(false);
   const [origin, setOrigin] = useState("");
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const isVi = i18n.language === "vi";
 
-  // Hàm điều chỉnh âm lượng Iframe qua postMessage
+  // Ham dieu chinh am luong Iframe qua postMessage
   const setVolumeLevel = useCallback((level: number) => {
     if (!iframeRef.current || !iframeRef.current.contentWindow) return;
     iframeRef.current.contentWindow.postMessage(
@@ -24,31 +25,37 @@ export default function AmbientSoundPlayer() {
   }, []);
 
   const startPlay = useCallback(() => {
+    setHasMountedIframe(true);
+    startTransition(() => {
+      setIsPlaying(true);
+    });
     if (!iframeRef.current || !iframeRef.current.contentWindow) return;
     iframeRef.current.contentWindow.postMessage(
       JSON.stringify({ event: "command", func: "playVideo", args: "" }),
       "*"
     );
-    // Hạ âm lượng xuống 50% luôn theo yêu cầu
     setVolumeLevel(50);
-    setIsPlaying(true);
   }, [setVolumeLevel]);
 
   const stopPlay = useCallback(() => {
+    startTransition(() => {
+      setIsPlaying(false);
+    });
     if (!iframeRef.current || !iframeRef.current.contentWindow) return;
     iframeRef.current.contentWindow.postMessage(
       JSON.stringify({ event: "command", func: "pauseVideo", args: "" }),
       "*"
     );
-    setIsPlaying(false);
   }, []);
 
   const togglePlay = useCallback(() => {
-    if (isPlaying) {
-      stopPlay();
-    } else {
-      startPlay();
-    }
+    startTransition(() => {
+      if (isPlaying) {
+        stopPlay();
+      } else {
+        startPlay();
+      }
+    });
   }, [isPlaying, startPlay, stopPlay]);
 
   useEffect(() => {
@@ -115,21 +122,23 @@ export default function AmbientSoundPlayer() {
 
   return (
     <>
-      {/* Live IFrame trong DOM */}
-      <div 
-        className="fixed -bottom-10 -left-10 w-1 h-1 opacity-0 pointer-events-none overflow-hidden z-[-1]" 
-        aria-hidden="true"
-      >
-        <iframe
-          ref={iframeRef}
-          width="200"
-          height="200"
-          src={youtubeSrc}
-          title="Ambient Music Player"
-          allow="autoplay; encrypted-media; picture-in-picture"
-          tabIndex={-1}
-        />
-      </div>
+      {/* Live IFrame trong DOM - chi nap khi nguoi dung tuong tac de tranh lam nghen LCP */}
+      {hasMountedIframe && (
+        <div 
+          className="fixed -bottom-10 -left-10 w-1 h-1 opacity-0 pointer-events-none overflow-hidden z-[-1]" 
+          aria-hidden="true"
+        >
+          <iframe
+            ref={iframeRef}
+            width="200"
+            height="200"
+            src={youtubeSrc}
+            title="Ambient Music Player"
+            allow="autoplay; encrypted-media; picture-in-picture"
+            tabIndex={-1}
+          />
+        </div>
+      )}
 
       {/* Floating Ambient Widget (Bottom Left) - Nhỏ gọn, 50% volume */}
       <motion.div

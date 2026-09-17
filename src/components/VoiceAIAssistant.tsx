@@ -10,14 +10,14 @@ type AIState = "IDLE" | "LISTENING" | "THINKING" | "SPEAKING";
 export default function VoiceAIAssistant() {
   const { i18n } = useTranslation();
   const [state, setState] = useState<AIState>("IDLE");
-  const [isLiveActive, setIsLiveActive] = useState(true); // Mic luôn tự mở!
-  const [isMuted, setIsMuted] = useState(false); // Chế độ Lắng nghe Thầm lặng
+  const [isLiveActive, setIsLiveActive] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
   const [userSpeech, setUserSpeech] = useState("");
   const [aiSpeech, setAiSpeech] = useState("");
   const [showToast, setShowToast] = useState(false);
 
   const recognitionRef = useRef<any>(null);
-  const isLiveActiveRef = useRef(true);
+  const isLiveActiveRef = useRef(false);
   const isMutedRef = useRef(false);
   const stateRef = useRef<AIState>("IDLE");
   const transcriptBufferRef = useRef<string>("");

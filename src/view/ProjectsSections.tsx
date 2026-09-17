@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, startTransition } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { 
@@ -88,7 +88,7 @@ export default function ProjectSections() {
               return (
                 <button
                   key={filter}
-                  onClick={() => setActiveFilter(filter)}
+                  onClick={() => startTransition(() => setActiveFilter(filter))}
                   className={`px-4 py-1.5 rounded-xl text-xs font-mono font-semibold uppercase tracking-wider transition-all duration-200 flex items-center gap-2 cursor-pointer ${
                     activeFilter.toUpperCase() === filter.toUpperCase()
                       ? "bg-yellow-400 text-zinc-950 shadow-md font-bold"
