@@ -199,13 +199,8 @@ export default function HomeView() {
             </div>
           </motion.div>
 
-          {/* Right Column: Clean Senior Portrait Card */}
-          <motion.div
-            className="lg:col-span-5 flex justify-center lg:justify-end"
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
-          >
+          {/* Right Column: Clean Senior Portrait Card - Direct Render for Sub-second LCP */}
+          <div className="lg:col-span-5 flex justify-center lg:justify-end">
             <div className="relative p-2.5 rounded-3xl bg-zinc-900/60 border border-zinc-800 shadow-2xl backdrop-blur-md max-w-sm w-full">
               <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-zinc-950 border border-zinc-800">
                 <Image 
@@ -213,6 +208,7 @@ export default function HomeView() {
                   alt={homeData.name} 
                   fill
                   priority
+                  loading="eager"
                   sizes="(max-width: 768px) 384px, 400px"
                   className="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-500"
                 />
@@ -230,7 +226,7 @@ export default function HomeView() {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
 
         </div>
 

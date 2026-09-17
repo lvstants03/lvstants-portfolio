@@ -113,6 +113,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="vi" className={`${inter.variable} ${cormorant.variable} scroll-smooth`} suppressHydrationWarning>
+      <head>
+        <link rel="preload" as="image" href="/avatar.jpg" fetchPriority="high" />
+      </head>
       <body className="font-body bg-black antialiased" suppressHydrationWarning>
         <script
           type="application/ld+json"
