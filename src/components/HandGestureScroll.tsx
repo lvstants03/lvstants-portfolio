@@ -50,8 +50,8 @@ export default function HandGestureScroll() {
           if (Math.abs(targetVelocityRef.current) < 0.2) targetVelocityRef.current = 0;
         }
 
-        // Tang toc / giam toc mem mai
-        currentVelocityRef.current += (targetVelocityRef.current - currentVelocityRef.current) * 0.18;
+        // Tang toc / giam toc mem mai (tang he so phan hoi giup phan xa tuc thi)
+        currentVelocityRef.current += (targetVelocityRef.current - currentVelocityRef.current) * 0.25;
 
         if (Math.abs(currentVelocityRef.current) > 0.2) {
           scrollPosRef.current += currentVelocityRef.current;
@@ -62,7 +62,7 @@ export default function HandGestureScroll() {
           );
           scrollPosRef.current = Math.max(0, Math.min(maxScroll, scrollPosRef.current));
 
-          window.scrollTo(0, scrollPosRef.current);
+          window.scrollTo({ top: scrollPosRef.current, behavior: "instant" });
         } else {
           scrollPosRef.current = window.scrollY;
         }
@@ -85,43 +85,47 @@ export default function HandGestureScroll() {
     return Math.hypot(p1.x - p2.x, p1.y - p2.y);
   };
 
-  // Phân loại cử chỉ: 1 Ngón (Lên), 2 Ngón (Xuống), Nắm Tay (Dừng)
+  // Kiem tra ngon tay duoi thang dua tren ty le hinh hoc cac khop MCP, PIP, TIP
+  const isFingerExtended = (
+    tip: { x: number; y: number },
+    pip: { x: number; y: number },
+    mcp: { x: number; y: number },
+    wrist: { x: number; y: number }
+  ) => {
+    const tipToMcp = Math.hypot(tip.x - mcp.x, tip.y - mcp.y);
+    const pipToMcp = Math.hypot(pip.x - mcp.x, pip.y - mcp.y);
+    const tipToWrist = Math.hypot(tip.x - wrist.x, tip.y - wrist.y);
+    const mcpToWrist = Math.hypot(mcp.x - wrist.x, mcp.y - wrist.y);
+
+    // Dau ngon vuon ra xa khoi khop ban tay MCP va vuot xa co tay ro ret
+    return tipToMcp > pipToMcp * 1.25 && tipToWrist > mcpToWrist * 1.1;
+  };
+
+  // Phan loai cu chi: 1 Ngon (Len), 2 Ngon (Xuong), Nam Tay (Dung)
   const classifyGesture = (landmarks: any[]): GestureState => {
     const wrist = landmarks[0];
 
-    const indexTip = landmarks[8];
-    const indexPip = landmarks[6];
+    const isIndex = isFingerExtended(landmarks[8], landmarks[6], landmarks[5], wrist);
+    const isMiddle = isFingerExtended(landmarks[12], landmarks[10], landmarks[9], wrist);
+    const isRing = isFingerExtended(landmarks[16], landmarks[14], landmarks[13], wrist);
+    const isPinky = isFingerExtended(landmarks[20], landmarks[18], landmarks[17], wrist);
 
-    const middleTip = landmarks[12];
-    const middlePip = landmarks[10];
-
-    const ringTip = landmarks[16];
-    const ringPip = landmarks[14];
-
-    const pinkyTip = landmarks[20];
-    const pinkyPip = landmarks[18];
-
-    const isIndexExtended = getDistance(indexTip, wrist) > getDistance(indexPip, wrist) * 1.05;
-    const isMiddleExtended = getDistance(middleTip, wrist) > getDistance(middlePip, wrist) * 1.05;
-    const isRingExtended = getDistance(ringTip, wrist) > getDistance(ringPip, wrist) * 1.05;
-    const isPinkyExtended = getDistance(pinkyTip, wrist) > getDistance(pinkyPip, wrist) * 1.05;
-
-    // 1. CỬ CHỈ NẮM TAY (FIST) -> Tất cả các ngón chính đều gập
-    if (!isIndexExtended && !isMiddleExtended && !isRingExtended) {
-      return "FIST_BRAKE";
-    }
-
-    // 2. CỬ CHỈ 1 NGÓN TRỎ (☝️) -> CUỘN LÊN (SCROLL UP)
-    if (isIndexExtended && !isMiddleExtended && !isRingExtended) {
+    // 1. CU CHI 1 NGON TRO -> CUON LEN (SCROLL UP)
+    if (isIndex && !isMiddle && !isRing && !isPinky) {
       return "ONE_FINGER_UP";
     }
 
-    // 3. CỬ CHỈ 2 NGÓN TRỎ + GIỮA (✌️) -> CUỘN XUỐNG (SCROLL DOWN)
-    if (isIndexExtended && isMiddleExtended && !isRingExtended && !isPinkyExtended) {
+    // 2. CU CHI 2 NGON TRO + GIUA -> CUON XUONG (SCROLL DOWN)
+    if (isIndex && isMiddle && !isRing && !isPinky) {
       return "TWO_FINGERS_DOWN";
     }
 
-    // 4. XÒE CẢ BÀN TAY (✋) HOẶC TRẠNG THÁI KHÁC -> ĐỨNG YÊN
+    // 3. CU CHI NAM TAY (FIST) -> Khong co bat ky ngon nao duoi thang
+    if (!isIndex && !isMiddle && !isRing && !isPinky) {
+      return "FIST_BRAKE";
+    }
+
+    // 4. TRANG THAI KHAC (Xoe tay hoac tu the khac) -> NEUTRAL
     return "NEUTRAL";
   };
 
@@ -141,7 +145,7 @@ export default function HandGestureScroll() {
       const landmarks = results.multiHandLandmarks[0];
       const rawGesture = classifyGesture(landmarks);
 
-      // Bộ lọc trễ 3-frame Hysteresis
+      // Bo loc tre 3-frame Hysteresis
       const history = gestureHistoryRef.current;
       history.push(rawGesture);
       if (history.length > 3) history.shift();
@@ -151,9 +155,9 @@ export default function HandGestureScroll() {
       const fistVotes = history.filter((g) => g === "FIST_BRAKE").length;
 
       let stableGesture: GestureState = "NEUTRAL";
-      if (fistVotes >= 2) {
+      if (fistVotes >= 2 && rawGesture === "FIST_BRAKE") {
         stableGesture = "FIST_BRAKE";
-      } else if (upVotes >= 2) {
+      } else if (upVotes >= 1 && rawGesture === "ONE_FINGER_UP") {
         stableGesture = "ONE_FINGER_UP";
       } else if (downVotes >= 2) {
         stableGesture = "TWO_FINGERS_DOWN";
