@@ -408,7 +408,7 @@ export default function VoiceAIAssistant() {
   };
 
   return (
-    <div className="fixed bottom-5 right-5 z-[95] flex flex-col items-end gap-2.5 pointer-events-none">
+    <div className="fixed bottom-3 right-3 sm:bottom-5 sm:right-5 z-[95] flex flex-col items-end gap-2.5 pointer-events-none">
       
       {/* Floating Subtitles Toast Bubble - Nhỏ gọn, tinh tế, tự ẩn sau 4s */}
       <AnimatePresence>
@@ -451,7 +451,7 @@ export default function VoiceAIAssistant() {
 
       {/* Pill Button Siêu Nhỏ Gọn Đối Xứng Với Nút Nhạc */}
       <motion.div
-        className="pointer-events-auto flex items-center gap-1.5 bg-zinc-950/90 border border-zinc-800 hover:border-yellow-500/40 rounded-full px-3 py-1.5 shadow-xl backdrop-blur-xl transition-all duration-300"
+        className="pointer-events-auto flex items-center gap-1 sm:gap-1.5 bg-zinc-950/90 border border-zinc-800 hover:border-yellow-500/40 rounded-full px-2.5 sm:px-3 py-1 sm:py-1.5 shadow-xl backdrop-blur-xl transition-all duration-300"
         initial={{ opacity: 0, scale: 0.9, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.3 }}

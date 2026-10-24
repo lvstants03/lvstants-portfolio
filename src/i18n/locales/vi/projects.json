@@ -9,6 +9,23 @@
     "preview": "Xem thử",
     "code": "Mã nguồn",
     "live_demo": "Xem Demo",
-    "view_repo": "Mã nguồn"
+    "view_repo": "Mã nguồn",
+    "view_graph": "Đồ thị mạng",
+    "view_table": "Bảng dữ liệu",
+    "graph_hint": "Nhấp vào bất kỳ Node dự án nào để xem chi tiết",
+    "zoom_in": "Phóng to",
+    "zoom_out": "Thu nhỏ",
+    "reset_zoom": "Đặt lại",
+    "table_search_placeholder": "Tìm kiếm dự án, công nghệ, mô tả...",
+    "col_project": "Dự án",
+    "col_language": "Ngôn ngữ",
+    "col_description": "Mô tả",
+    "col_stats": "Chỉ số",
+    "col_updated": "Cập nhật",
+    "col_actions": "Thao tác",
+    "stars": "Stars",
+    "forks": "Forks",
+    "close": "Đóng",
+    "showing_results": "Hiển thị {{count}} dự án"
   }
 }

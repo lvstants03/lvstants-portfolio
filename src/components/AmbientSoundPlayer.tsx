@@ -142,14 +142,14 @@ export default function AmbientSoundPlayer() {
 
       {/* Floating Ambient Widget (Bottom Left) - Nhỏ gọn, 50% volume */}
       <motion.div
-        className="fixed bottom-5 left-5 z-[90]"
+        className="fixed bottom-3 left-3 sm:bottom-5 sm:left-5 z-[90]"
         initial={{ opacity: 0, scale: 0.9, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.3 }}
       >
         <button
           onClick={togglePlay}
-          className={`group flex items-center gap-2.5 px-3 py-1.5 rounded-full backdrop-blur-xl border transition-all duration-300 shadow-xl cursor-pointer ${
+          className={`group flex items-center gap-1.5 sm:gap-2.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full backdrop-blur-xl border transition-all duration-300 shadow-xl cursor-pointer ${
             isPlaying
               ? "bg-zinc-950/90 border-yellow-500/40 text-yellow-400 shadow-yellow-500/10"
               : "bg-zinc-950/80 border-zinc-800/80 text-zinc-400 hover:text-white hover:border-zinc-700"

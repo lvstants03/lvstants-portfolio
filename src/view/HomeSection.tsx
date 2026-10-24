@@ -87,17 +87,17 @@ export default function HomeView() {
 
             {/* Headline with Dynamic Flipping Role */}
             <div className="space-y-3">
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-[1.2]">
+              <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-[1.2]">
                 <span className="text-zinc-300 block">
                   {isVi ? "Kỹ sư Phần mềm &" : "Software Engineer &"}
                 </span>
-                <div className="h-[1.3em] relative overflow-hidden flex items-center pt-1">
+                <div className="h-[1.4em] relative overflow-hidden flex items-center">
                   <AnimatePresence mode="wait">
                     <motion.span
                       key={roleIndex}
-                      initial={{ y: 28, opacity: 0 }}
+                      initial={{ y: 24, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
-                      exit={{ y: -28, opacity: 0 }}
+                      exit={{ y: -24, opacity: 0 }}
                       transition={{ duration: 0.35, ease: "easeOut" }}
                       className="text-yellow-400 block whitespace-nowrap"
                     >

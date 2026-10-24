@@ -355,7 +355,7 @@ export default function HandGestureScroll() {
   }, [isActive]);
 
   return (
-    <div className="fixed top-5 right-5 z-[100] flex flex-col items-end gap-2.5 pointer-events-none">
+    <div className="fixed top-5 right-5 z-[100] hidden lg:flex flex-col items-end gap-2.5 pointer-events-none">
       {/* Nút Kích hoạt Camera Cử chỉ ở góc trên bên phải */}
       <motion.div
         className="pointer-events-auto"

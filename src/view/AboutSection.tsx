@@ -29,7 +29,7 @@ export default function AboutSection() {
   }
 
   return (
-    <section id="introduce" className="py-24 px-4 bg-[#09090b] text-zinc-100 relative">
+    <div className="py-16 md:py-24 px-4 bg-[#09090b] text-zinc-100 relative">
       <div className="container mx-auto max-w-5xl px-4 sm:px-6 relative z-10">
         
         {/* Section Header */}
@@ -163,6 +163,6 @@ export default function AboutSection() {
 
         </div>
       </div>
-    </section>
+    </div>
   );
 }

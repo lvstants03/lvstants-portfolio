@@ -36,7 +36,7 @@ export const VerticalNav = ({ activeSection, sectionIds }: VerticalNavProps) => 
 
   return (
     <div 
-      className={`fixed right-2 md:right-6 top-1/2 -translate-y-1/2 z-[100] flex flex-col items-end gap-1 transition-all duration-700
+      className={`fixed right-2 md:right-6 top-1/2 -translate-y-1/2 z-[100] hidden md:flex flex-col items-end gap-1 transition-all duration-700
         ${isFooterVisible 
           ? "opacity-0 pointer-events-none translate-x-10" 
           : "opacity-100 translate-x-0"

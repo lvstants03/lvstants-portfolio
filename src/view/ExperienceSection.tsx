@@ -29,7 +29,7 @@ export default function ExperienceSection() {
   const currentExp = experiences.find(e => e.id === selectedId) || experiences[0];
 
   return (
-    <section id="experience" className="py-24 bg-[#09090b] text-zinc-100 relative">
+    <div className="py-16 md:py-24 bg-[#09090b] text-zinc-100 relative">
       <div className="container mx-auto max-w-5xl px-4 sm:px-6 relative z-10">
         
         {/* Section Header */}
@@ -231,6 +231,6 @@ export default function ExperienceSection() {
 
         </div>
       </div>
-    </section>
+    </div>
   );
 }

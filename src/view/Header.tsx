@@ -95,10 +95,15 @@ export default function Header({ activeSection = "home", onNavigate }: HeaderPro
               setMobileMenuOpen(false);
             }}
           >
-            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-yellow-500 to-amber-400 p-[1px] shadow-sm">
-              <div className="w-full h-full rounded-full bg-zinc-950 flex items-center justify-center">
-                <span className="text-[11px] font-black text-yellow-400 font-mono tracking-tighter">LM</span>
-              </div>
+            <div className="w-8 h-8 rounded-full overflow-hidden border border-zinc-800 bg-zinc-950 flex items-center justify-center relative shadow-sm">
+              <Image
+                src="/logo.png"
+                alt="Logo"
+                width={32}
+                height={32}
+                className="w-full h-full object-cover"
+                priority
+              />
             </div>
 
             <div className="flex flex-col">

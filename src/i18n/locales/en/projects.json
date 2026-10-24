@@ -9,6 +9,23 @@
     "preview": "Live Demo",
     "code": "View Code",
     "live_demo": "Live Demo",
-    "view_repo": "View Repo"
+    "view_repo": "View Repo",
+    "view_graph": "Network Graph",
+    "view_table": "Data Table",
+    "graph_hint": "Click on any project node to view details",
+    "zoom_in": "Zoom In",
+    "zoom_out": "Zoom Out",
+    "reset_zoom": "Reset",
+    "table_search_placeholder": "Search projects, tech, description...",
+    "col_project": "Project",
+    "col_language": "Language",
+    "col_description": "Description",
+    "col_stats": "Metrics",
+    "col_updated": "Updated",
+    "col_actions": "Actions",
+    "stars": "Stars",
+    "forks": "Forks",
+    "close": "Close",
+    "showing_results": "Showing {{count}} projects"
   }
 }

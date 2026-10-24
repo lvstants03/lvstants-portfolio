@@ -55,7 +55,7 @@ export default function Portfolio() {
           <CertificatesSection />
         </section>
 
-        <section id="experience" className="border-t border-zinc-900 pb-28 scroll-mt-28">
+        <section id="experience" className="border-t border-zinc-900/80 scroll-mt-28">
           <ExperienceSection />
         </section>
       </main>

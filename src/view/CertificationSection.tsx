@@ -34,7 +34,7 @@ export default function CertificatesSection() {
   if (!mounted) return <div className="py-24 bg-[#09090b] min-h-[500px]" />;
 
   return (
-    <div className="py-24 bg-[#09090b] px-4 relative text-zinc-100">
+    <div className="py-16 md:py-24 bg-[#09090b] px-4 relative text-zinc-100">
       <div className="container mx-auto max-w-5xl px-4 sm:px-6 relative z-10">
         
         {/* Section Header */}
