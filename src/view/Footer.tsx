@@ -26,6 +26,10 @@ export default function Footer() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  if (!mounted) {
+    return <footer className="relative bg-[#09090b] border-t border-zinc-900/80 min-h-[350px]" />;
+  }
+
   return (
     <footer className="relative bg-[#09090b] border-t border-zinc-900/80 pt-8 md:pt-12 pb-28 sm:pb-16 text-zinc-100 font-sans">
       <div className="container mx-auto max-w-5xl px-4 sm:px-6 relative z-10">

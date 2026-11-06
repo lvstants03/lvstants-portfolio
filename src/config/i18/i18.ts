@@ -18,6 +18,10 @@ import enProjects from "../../i18n/locales/en/projects.json";
 import enCertificates from "../../i18n/locales/en/certificates.json"; 
 import enFooter from "../../i18n/locales/en/footer.json";
 import enExperencies from "../../i18n/locales/en/experience.json";
+import viContact from "../../i18n/locales/vi/contact.json";
+import viLegal from "../../i18n/locales/vi/legal.json";
+import enContact from "../../i18n/locales/en/contact.json";
+import enLegal from "../../i18n/locales/en/legal.json";
 
 
 export const resources = {
@@ -30,7 +34,9 @@ vi: {
       projects: viProjects,
       certificates: viCertificates,
       experience: viExperencies,
-      footer: viFooter
+      footer: viFooter,
+      contact: viContact,
+      legal: viLegal
     }
   },
   en: {
@@ -42,7 +48,9 @@ vi: {
       projects: enProjects,
       certificates: enCertificates,
       experience: enExperencies,
-      footer: enFooter
+      footer: enFooter,
+      contact: enContact,
+      legal: enLegal
     }
   }
 } as const;

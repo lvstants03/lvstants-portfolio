@@ -64,9 +64,9 @@ export default function ComingSoon({
 
         <Link href={backUrl}>
           <motion.button 
-            whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.08)" }}
+            whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="flex items-center gap-3 bg-white/5 border border-white/10 text-white px-10 py-4 rounded-2xl font-black uppercase text-xs tracking-[0.2em] transition-all"
+            className="flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/10 text-white px-10 py-4 rounded-2xl font-black uppercase text-xs tracking-[0.2em] transition-all"
           >
             <ArrowLeft className="w-4 h-4 text-yellow-500" />
             Quay lại trang chủ

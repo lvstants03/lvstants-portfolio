@@ -4,15 +4,18 @@ import { useState, useEffect, startTransition } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, Globe } from "lucide-react";
+import { Menu, X, Globe, ArrowLeft } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Flag from "react-world-flags";
 import { useTranslation } from "react-i18next";
+import { useScrollSpy } from "@/hooks/useScrollSpy";
 
 interface HeaderProps {
   activeSection?: string;
   onNavigate?: (sectionId: string) => void;
 }
+
+const defaultSectionIds = ["home", "introduce", "skills", "projects", "certificates", "experience"];
 
 const handleSmoothScroll = (elementId: string) => {
   const element = document.getElementById(elementId);
@@ -30,10 +33,12 @@ const handleSmoothScroll = (elementId: string) => {
   }
 };
 
-export default function Header({ activeSection = "home", onNavigate }: HeaderProps) {
+export default function Header({ activeSection, onNavigate }: HeaderProps) {
   const { t, i18n } = useTranslation();
   const pathname = usePathname();
   const isHomePage = pathname === "/";
+  const spyActiveSection = useScrollSpy(defaultSectionIds);
+  const currentActiveSection = activeSection || spyActiveSection || "home";
 
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -118,10 +123,11 @@ export default function Header({ activeSection = "home", onNavigate }: HeaderPro
         </Link>
 
         {/* Desktop Navigation Pills */}
-        {isHomePage && (
-          <nav className="hidden lg:flex items-center gap-1 bg-zinc-900/60 border border-zinc-800/60 p-1 rounded-full">
-            {navigationItems.map((item) => {
-              const isActive = activeSection === item.id;
+        <nav className="hidden lg:flex items-center gap-1 bg-zinc-900/60 border border-zinc-800/60 p-1 rounded-full">
+          {navigationItems.map((item) => {
+            const isActive = isHomePage && currentActiveSection === item.id;
+
+            if (isHomePage) {
               return (
                 <button
                   key={item.id}
@@ -149,11 +155,22 @@ export default function Header({ activeSection = "home", onNavigate }: HeaderPro
                   )}
                 </button>
               );
-            })}
-          </nav>
-        )}
+            }
 
-        {/* Right Action: Language Switcher & Mobile Hamburger */}
+            const targetHref = item.id === "home" ? "/" : `/#${item.id}`;
+            return (
+              <Link
+                key={item.id}
+                href={targetHref}
+                className="px-3.5 py-1.5 rounded-full text-xs font-medium tracking-tight transition-all duration-200 relative cursor-pointer text-zinc-400 hover:text-zinc-200 font-normal"
+              >
+                <span className="relative z-10">{item.name}</span>
+              </Link>
+            );
+          })}
+        </nav>
+
+        {/* Right Action: Language Switcher & Mobile Menu */}
         <div className="flex items-center gap-2 relative z-[110]">
           {/* Language Toggle Pill */}
           <div className="flex items-center bg-zinc-900/80 border border-zinc-800 p-0.5 rounded-full">
@@ -183,21 +200,19 @@ export default function Header({ activeSection = "home", onNavigate }: HeaderPro
           </div>
 
           {/* Mobile Menu Button */}
-          {isHomePage && (
-            <button
-              className="lg:hidden w-9 h-9 flex items-center justify-center bg-zinc-900/80 border border-zinc-800 rounded-full text-zinc-300 hover:text-white transition-all active:scale-95 cursor-pointer"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle menu"
-            >
-              {mobileMenuOpen ? <X className="w-4 h-4 text-yellow-400" /> : <Menu className="w-4 h-4" />}
-            </button>
-          )}
+          <button
+            className="lg:hidden w-9 h-9 flex items-center justify-center bg-zinc-900/80 border border-zinc-800 rounded-full text-zinc-300 hover:text-white transition-all active:scale-95 cursor-pointer"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X className="w-4 h-4 text-yellow-400" /> : <Menu className="w-4 h-4" />}
+          </button>
         </div>
       </div>
 
       {/* Mobile Drawer */}
       <AnimatePresence>
-        {isHomePage && mobileMenuOpen && (
+        {mobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, y: -15 }}
             animate={{ opacity: 1, y: 0 }}
@@ -206,24 +221,42 @@ export default function Header({ activeSection = "home", onNavigate }: HeaderPro
             className="fixed inset-x-4 top-20 bg-zinc-950/95 backdrop-blur-2xl border border-zinc-800 rounded-3xl p-6 shadow-2xl z-[100] lg:hidden space-y-4"
           >
             <div className="flex flex-col gap-2">
-              {navigationItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => {
-                    handleSmoothScroll(item.id);
-                    onNavigate?.(item.id);
-                    setMobileMenuOpen(false);
-                  }}
-                  className={`px-4 py-3 rounded-2xl text-left text-sm font-mono font-semibold uppercase tracking-wider flex items-center justify-between transition-colors ${
-                    activeSection === item.id
-                      ? "bg-yellow-400 text-zinc-950 font-bold"
-                      : "text-zinc-400 hover:bg-zinc-900 hover:text-white"
-                  }`}
-                >
-                  <span>{item.name}</span>
-                  {activeSection === item.id && <span className="w-2 h-2 rounded-full bg-zinc-950" />}
-                </button>
-              ))}
+              {navigationItems.map((item) => {
+                const isActive = isHomePage && currentActiveSection === item.id;
+
+                if (isHomePage) {
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() => {
+                        handleSmoothScroll(item.id);
+                        onNavigate?.(item.id);
+                        setMobileMenuOpen(false);
+                      }}
+                      className={`px-4 py-3 rounded-2xl text-left text-sm font-mono font-semibold uppercase tracking-wider flex items-center justify-between transition-colors ${
+                        isActive
+                          ? "bg-yellow-400 text-zinc-950 font-bold"
+                          : "text-zinc-400 hover:bg-zinc-900 hover:text-white"
+                      }`}
+                    >
+                      <span>{item.name}</span>
+                      {isActive && <span className="w-2 h-2 rounded-full bg-zinc-950" />}
+                    </button>
+                  );
+                }
+
+                const targetHref = item.id === "home" ? "/" : `/#${item.id}`;
+                return (
+                  <Link
+                    key={item.id}
+                    href={targetHref}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="px-4 py-3 rounded-2xl text-left text-sm font-mono font-semibold uppercase tracking-wider flex items-center justify-between transition-colors text-zinc-400 hover:bg-zinc-900 hover:text-white"
+                  >
+                    <span>{item.name}</span>
+                  </Link>
+                );
+              })}
             </div>
           </motion.div>
         )}

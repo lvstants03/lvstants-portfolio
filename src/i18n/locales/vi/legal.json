@@ -1,0 +1,148 @@
+{
+  "common": {
+    "toc": "Mục lục",
+    "updated_label": "Cập nhật lần cuối",
+    "updated_date": "06/11/2026",
+    "cta_title": "Bạn còn thắc mắc?",
+    "cta_desc": "Nếu có bất kỳ câu hỏi nào về tài liệu này, đừng ngần ngại liên hệ với tôi.",
+    "cta_button": "Liên hệ ngay",
+    "back_home": "Về trang chủ",
+    "related": "Xem thêm"
+  },
+  "privacy": {
+    "badge": "02 // CHÍNH SÁCH BẢO MẬT",
+    "title_lead": "Chính sách",
+    "title_highlight": "Bảo mật",
+    "description": "Tài liệu này giải thích cách website lvstants-portfolio.vercel.app thu thập, sử dụng và bảo vệ thông tin của bạn khi truy cập.",
+    "related_label": "Điều khoản dịch vụ",
+    "related_href": "/terms-of-service",
+    "sections": [
+      {
+        "id": "intro",
+        "heading": "Giới thiệu",
+        "body": [
+          "Website này là portfolio cá nhân của Lý Văn Mỹ (LVSTANTS). Tôi tôn trọng quyền riêng tư của bạn và chỉ thu thập lượng dữ liệu tối thiểu cần thiết để website hoạt động."
+        ]
+      },
+      {
+        "id": "data-collected",
+        "heading": "Dữ liệu được thu thập",
+        "body": ["Tùy theo tính năng bạn sử dụng, các dữ liệu sau có thể được xử lý:"],
+        "bullets": [
+          "Biểu mẫu liên hệ: họ tên, email, chủ đề và nội dung tin nhắn do bạn tự nguyện cung cấp.",
+          "Tùy chọn ngôn ngữ: lưu trong localStorage của trình duyệt để ghi nhớ lựa chọn VI/EN.",
+          "Camera (Cuộn bằng cử chỉ tay): hình ảnh được xử lý hoàn toàn cục bộ trên thiết bị bằng MediaPipe, không được ghi lại hay gửi lên máy chủ.",
+          "Micro (Trợ lý giọng nói): chỉ hoạt động khi bạn chủ động bật, nội dung giọng nói được chuyển thành văn bản để xử lý yêu cầu.",
+          "Dữ liệu kỹ thuật: địa chỉ IP và thông tin trình duyệt có thể được nền tảng hosting ghi nhận tạm thời phục vụ bảo mật và chống spam."
+        ]
+      },
+      {
+        "id": "purpose",
+        "heading": "Mục đích sử dụng",
+        "bullets": [
+          "Phản hồi tin nhắn và yêu cầu hợp tác của bạn.",
+          "Cải thiện trải nghiệm và hiệu năng website.",
+          "Ngăn chặn spam, lạm dụng và các hành vi gây hại."
+        ],
+        "body": ["Tôi không bán, cho thuê hay chia sẻ dữ liệu cá nhân của bạn cho mục đích quảng cáo."]
+      },
+      {
+        "id": "third-party",
+        "heading": "Dịch vụ bên thứ ba",
+        "body": ["Website sử dụng một số dịch vụ bên ngoài, mỗi dịch vụ có chính sách bảo mật riêng:"],
+        "bullets": [
+          "Vercel: lưu trữ và phân phối website.",
+          "YouTube (youtube-nocookie.com): phát nhạc nền ở chế độ hạn chế cookie.",
+          "jsDelivr / MediaPipe: tải thư viện nhận diện cử chỉ tay.",
+          "GitHub API: hiển thị danh sách dự án công khai.",
+          "Dịch vụ gửi email: chuyển tiếp nội dung biểu mẫu liên hệ."
+        ]
+      },
+      {
+        "id": "storage",
+        "heading": "Lưu trữ & bảo mật",
+        "body": [
+          "Dữ liệu được truyền qua kết nối HTTPS. Tin nhắn liên hệ chỉ được lưu trong hộp thư email cá nhân và được xóa khi không còn cần thiết.",
+          "Dù áp dụng các biện pháp hợp lý, không có phương thức truyền tải nào trên Internet an toàn tuyệt đối."
+        ]
+      },
+      {
+        "id": "rights",
+        "heading": "Quyền của bạn",
+        "bullets": [
+          "Yêu cầu xem, chỉnh sửa hoặc xóa dữ liệu bạn đã gửi.",
+          "Từ chối cấp quyền camera hoặc micro bất cứ lúc nào qua cài đặt trình duyệt.",
+          "Xóa dữ liệu localStorage bằng cách xóa dữ liệu duyệt web."
+        ]
+      },
+      {
+        "id": "contact",
+        "heading": "Liên hệ",
+        "body": ["Mọi yêu cầu liên quan đến quyền riêng tư, vui lòng gửi về email lyvanmy357@gmail.com hoặc sử dụng trang Liên hệ."]
+      }
+    ]
+  },
+  "terms": {
+    "badge": "03 // ĐIỀU KHOẢN DỊCH VỤ",
+    "title_lead": "Điều khoản",
+    "title_highlight": "Dịch vụ",
+    "description": "Vui lòng đọc kỹ các điều khoản dưới đây trước khi sử dụng website. Việc tiếp tục truy cập đồng nghĩa với việc bạn chấp nhận các điều khoản này.",
+    "related_label": "Chính sách bảo mật",
+    "related_href": "/privacy-policy",
+    "sections": [
+      {
+        "id": "acceptance",
+        "heading": "Chấp nhận điều khoản",
+        "body": ["Khi truy cập và sử dụng website, bạn đồng ý tuân thủ các Điều khoản dịch vụ này. Nếu không đồng ý, vui lòng ngừng sử dụng website."]
+      },
+      {
+        "id": "ip",
+        "heading": "Sở hữu trí tuệ",
+        "body": [
+          "Toàn bộ nội dung bao gồm thiết kế, mã nguồn, logo, hình ảnh và văn bản thuộc quyền sở hữu của Lý Văn Mỹ, trừ khi có ghi chú khác.",
+          "Các dự án mã nguồn mở được liên kết tuân theo giấy phép riêng được công bố trên kho GitHub tương ứng."
+        ]
+      },
+      {
+        "id": "acceptable-use",
+        "heading": "Sử dụng hợp lệ",
+        "body": ["Bạn cam kết không:"],
+        "bullets": [
+          "Sao chép, phân phối lại nội dung với mục đích thương mại khi chưa được cho phép.",
+          "Gửi spam, mã độc hoặc nội dung vi phạm pháp luật qua biểu mẫu liên hệ.",
+          "Tấn công, dò quét lỗ hổng hoặc làm gián đoạn hoạt động của website."
+        ]
+      },
+      {
+        "id": "third-party-content",
+        "heading": "Nội dung bên thứ ba",
+        "body": ["Website có thể chứa liên kết hoặc nội dung nhúng từ bên thứ ba (GitHub, YouTube, LinkedIn...). Tôi không chịu trách nhiệm về nội dung và chính sách của các dịch vụ này."]
+      },
+      {
+        "id": "disclaimer",
+        "heading": "Miễn trừ trách nhiệm",
+        "body": ["Website được cung cấp theo hiện trạng (\"as is\"). Thông tin mang tính tham khảo và có thể thay đổi mà không cần báo trước. Các tính năng thử nghiệm (cử chỉ tay, giọng nói AI) có thể không hoạt động ổn định trên mọi thiết bị."]
+      },
+      {
+        "id": "liability",
+        "heading": "Giới hạn trách nhiệm",
+        "body": ["Trong phạm vi pháp luật cho phép, tôi không chịu trách nhiệm cho bất kỳ thiệt hại trực tiếp hoặc gián tiếp nào phát sinh từ việc sử dụng hoặc không thể sử dụng website."]
+      },
+      {
+        "id": "changes",
+        "heading": "Thay đổi điều khoản",
+        "body": ["Điều khoản có thể được cập nhật theo thời gian. Ngày cập nhật mới nhất luôn được hiển thị ở đầu trang."]
+      },
+      {
+        "id": "law",
+        "heading": "Luật áp dụng",
+        "body": ["Các điều khoản này được điều chỉnh và giải thích theo pháp luật nước Cộng hòa Xã hội Chủ nghĩa Việt Nam."]
+      },
+      {
+        "id": "contact",
+        "heading": "Liên hệ",
+        "body": ["Nếu có câu hỏi về Điều khoản dịch vụ, vui lòng gửi email về lyvanmy357@gmail.com hoặc sử dụng trang Liên hệ."]
+      }
+    ]
+  }
+}

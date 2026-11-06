@@ -1,0 +1,148 @@
+{
+  "common": {
+    "toc": "Contents",
+    "updated_label": "Last updated",
+    "updated_date": "November 6, 2026",
+    "cta_title": "Still have questions?",
+    "cta_desc": "If you have any questions about this document, feel free to reach out.",
+    "cta_button": "Contact me",
+    "back_home": "Back to home",
+    "related": "See also"
+  },
+  "privacy": {
+    "badge": "02 // PRIVACY POLICY",
+    "title_lead": "Privacy",
+    "title_highlight": "Policy",
+    "description": "This document explains how lvstants-portfolio.vercel.app collects, uses and protects your information when you visit.",
+    "related_label": "Terms of Service",
+    "related_href": "/terms-of-service",
+    "sections": [
+      {
+        "id": "intro",
+        "heading": "Introduction",
+        "body": [
+          "This website is the personal portfolio of Ly Van My (LVSTANTS). I respect your privacy and only collect the minimum data required for the website to function."
+        ]
+      },
+      {
+        "id": "data-collected",
+        "heading": "Data we collect",
+        "body": ["Depending on the features you use, the following data may be processed:"],
+        "bullets": [
+          "Contact form: name, email, subject and message that you voluntarily provide.",
+          "Language preference: stored in your browser localStorage to remember your VI/EN choice.",
+          "Camera (Hand gesture scroll): frames are processed entirely on your device with MediaPipe and are never recorded or uploaded.",
+          "Microphone (Voice assistant): only active when you enable it; speech is transcribed to text to handle your request.",
+          "Technical data: IP address and browser info may be temporarily logged by the hosting platform for security and anti-spam purposes."
+        ]
+      },
+      {
+        "id": "purpose",
+        "heading": "How we use it",
+        "bullets": [
+          "To reply to your messages and collaboration requests.",
+          "To improve the website experience and performance.",
+          "To prevent spam, abuse and harmful activity."
+        ],
+        "body": ["I do not sell, rent or share your personal data for advertising purposes."]
+      },
+      {
+        "id": "third-party",
+        "heading": "Third-party services",
+        "body": ["The website relies on some external services, each with its own privacy policy:"],
+        "bullets": [
+          "Vercel: hosting and content delivery.",
+          "YouTube (youtube-nocookie.com): background music in privacy-enhanced mode.",
+          "jsDelivr / MediaPipe: loading the hand-gesture recognition library.",
+          "GitHub API: displaying public projects.",
+          "Email delivery service: forwarding contact form submissions."
+        ]
+      },
+      {
+        "id": "storage",
+        "heading": "Storage & security",
+        "body": [
+          "Data is transmitted over HTTPS. Contact messages are kept only in my personal mailbox and deleted when no longer needed.",
+          "While reasonable measures are applied, no method of transmission over the Internet is 100% secure."
+        ]
+      },
+      {
+        "id": "rights",
+        "heading": "Your rights",
+        "bullets": [
+          "Request access to, correction or deletion of the data you submitted.",
+          "Revoke camera or microphone permissions at any time in your browser settings.",
+          "Clear localStorage data by clearing your browsing data."
+        ]
+      },
+      {
+        "id": "contact",
+        "heading": "Contact",
+        "body": ["For any privacy-related request, please email lyvanmy357@gmail.com or use the Contact page."]
+      }
+    ]
+  },
+  "terms": {
+    "badge": "03 // TERMS OF SERVICE",
+    "title_lead": "Terms of",
+    "title_highlight": "Service",
+    "description": "Please read these terms carefully before using the website. Continued access means you accept these terms.",
+    "related_label": "Privacy Policy",
+    "related_href": "/privacy-policy",
+    "sections": [
+      {
+        "id": "acceptance",
+        "heading": "Acceptance of terms",
+        "body": ["By accessing and using this website, you agree to comply with these Terms of Service. If you do not agree, please stop using the website."]
+      },
+      {
+        "id": "ip",
+        "heading": "Intellectual property",
+        "body": [
+          "All content including design, source code, logos, images and text is owned by Ly Van My unless otherwise noted.",
+          "Linked open-source projects are governed by the licenses published in their respective GitHub repositories."
+        ]
+      },
+      {
+        "id": "acceptable-use",
+        "heading": "Acceptable use",
+        "body": ["You agree not to:"],
+        "bullets": [
+          "Copy or redistribute content for commercial purposes without permission.",
+          "Send spam, malware or unlawful content through the contact form.",
+          "Attack, scan for vulnerabilities or disrupt the operation of the website."
+        ]
+      },
+      {
+        "id": "third-party-content",
+        "heading": "Third-party content",
+        "body": ["The website may contain links to or embedded content from third parties (GitHub, YouTube, LinkedIn...). I am not responsible for their content or policies."]
+      },
+      {
+        "id": "disclaimer",
+        "heading": "Disclaimer",
+        "body": ["The website is provided \"as is\". Information is for reference only and may change without notice. Experimental features (hand gestures, AI voice) may not work reliably on every device."]
+      },
+      {
+        "id": "liability",
+        "heading": "Limitation of liability",
+        "body": ["To the extent permitted by law, I am not liable for any direct or indirect damages arising from the use of, or inability to use, the website."]
+      },
+      {
+        "id": "changes",
+        "heading": "Changes to these terms",
+        "body": ["These terms may be updated over time. The latest update date is always shown at the top of the page."]
+      },
+      {
+        "id": "law",
+        "heading": "Governing law",
+        "body": ["These terms are governed by and construed in accordance with the laws of the Socialist Republic of Vietnam."]
+      },
+      {
+        "id": "contact",
+        "heading": "Contact",
+        "body": ["If you have questions about these Terms of Service, please email lyvanmy357@gmail.com or use the Contact page."]
+      }
+    ]
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "badge": "01 // LIÊN HỆ",
+  "title_lead": "Cùng nhau xây dựng điều gì đó",
+  "title_highlight": "thật đặc biệt",
+  "description": "Bạn có dự án cần triển khai, cơ hội tuyển dụng hoặc chỉ muốn trao đổi về kiến trúc phần mềm? Hãy để lại lời nhắn, tôi sẽ phản hồi sớm nhất có thể.",
+  "available": "Sẵn sàng nhận dự án mới",
+  "info": {
+    "heading": "Thông tin liên hệ",
+    "email": "Email",
+    "phone": "Điện thoại",
+    "location": "Địa điểm",
+    "response": "Thời gian phản hồi",
+    "response_value": "Trong vòng 24 giờ làm việc",
+    "socials": "Mạng xã hội",
+    "copy": "Sao chép",
+    "copied": "Đã sao chép"
+  },
+  "form": {
+    "heading": "Gửi tin nhắn",
+    "subheading": "Các trường có dấu * là bắt buộc.",
+    "name": "Họ và tên *",
+    "name_placeholder": "Nguyễn Văn A",
+    "email": "Email *",
+    "email_placeholder": "ban@congty.com",
+    "subject": "Chủ đề *",
+    "subject_placeholder": "Chọn chủ đề",
+    "subjects": {
+      "hiring": "Tuyển dụng",
+      "freelance": "Dự án Freelance",
+      "collaboration": "Hợp tác",
+      "other": "Khác"
+    },
+    "message": "Nội dung *",
+    "message_placeholder": "Mô tả ngắn gọn về dự án hoặc nội dung bạn muốn trao đổi...",
+    "privacy_note": "Bằng việc gửi biểu mẫu, bạn đồng ý với",
+    "privacy_link": "Chính sách bảo mật",
+    "submit": "Gửi tin nhắn",
+    "sending": "Đang gửi...",
+    "success_title": "Gửi thành công!",
+    "success_desc": "Cảm ơn bạn đã liên hệ. Tôi sẽ phản hồi qua email trong thời gian sớm nhất.",
+    "send_another": "Gửi tin nhắn khác",
+    "error_generic": "Đã xảy ra lỗi khi gửi. Vui lòng thử lại sau.",
+    "error_rate_limit": "Bạn đã gửi quá nhiều lần. Vui lòng thử lại sau 1 phút.",
+    "error_not_configured": "Hệ thống gửi thư đang bảo trì. Bạn có thể gửi trực tiếp qua email.",
+    "fallback_mailto": "Gửi qua ứng dụng Email",
+    "errors": {
+      "name_required": "Vui lòng nhập họ và tên.",
+      "name_length": "Họ và tên phải từ 2 đến 60 ký tự.",
+      "email_required": "Vui lòng nhập email.",
+      "email_invalid": "Email không đúng định dạng.",
+      "subject_required": "Vui lòng chọn chủ đề.",
+      "subject_invalid": "Chủ đề không hợp lệ.",
+      "message_required": "Vui lòng nhập nội dung.",
+      "message_length": "Nội dung phải từ 10 đến 2000 ký tự."
+    }
+  },
+  "faq": {
+    "heading": "Câu hỏi thường gặp",
+    "items": [
+      {
+        "q": "Bạn có nhận dự án freelance không?",
+        "a": "Có. Tôi nhận các dự án web full-stack, xây dựng hệ thống backend (NestJS, .NET) và tối ưu hiệu năng frontend (Next.js, React)."
+      },
+      {
+        "q": "Bạn có làm việc từ xa không?",
+        "a": "Có. Tôi làm việc linh hoạt từ xa hoặc tại TP. Hồ Chí Minh, đồng bộ theo múi giờ GMT+7."
+      },
+      {
+        "q": "Quy trình bắt đầu một dự án như thế nào?",
+        "a": "Trao đổi yêu cầu → Đề xuất giải pháp & ước lượng → Thống nhất phạm vi → Triển khai theo sprint và bàn giao kèm tài liệu."
+      }
+    ]
+  }
+}

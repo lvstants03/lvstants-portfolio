@@ -122,13 +122,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="vi" className={`${inter.variable} ${cormorant.variable} scroll-smooth`} suppressHydrationWarning>
+    <html lang="vi" className={`${inter.variable} ${cormorant.variable} scroll-smooth`} data-scroll-behavior="smooth" suppressHydrationWarning>
       <body className="font-body bg-black antialiased" suppressHydrationWarning>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <I18nProvider>
+          <Header />
           <main className="min-h-screen">
             {children}
           </main>

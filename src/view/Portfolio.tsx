@@ -2,7 +2,6 @@
 
 import dynamic from "next/dynamic";
 import HomeView from "./HomeSection";
-import Header from "./Header";
 import SpotlightEffect from "@/components/SpotlightEffect";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
 
@@ -27,9 +26,6 @@ export default function Portfolio() {
 
       {/* Ambient Grid & Subtle Spotlight */}
       <SpotlightEffect />
-
-      {/* Header */}
-      <Header activeSection={activeSection ?? "home"} />
 
       {/* Vertical Navigation Indicator */}
       <VerticalNav activeSection={activeSection ?? undefined} sectionIds={sectionIds} />
